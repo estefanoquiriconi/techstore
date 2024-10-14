@@ -1,7 +1,7 @@
 # **App de Tienda Electrónica**  
 
 ## 1. **Introducción**  
-Este proyecto propone el desarrollo de una plataforma para la venta de productos electrónicos, incluyendo celulares, notebooks, tablets y accesorios. Accesible mediante una aplicación móvil. La plataforma busca mejorar la experiencia de compra en línea, optimizando la navegación, el proceso de compra y el servicio al cliente.
+Este proyecto propone el desarrollo de una plataforma para la venta de productos electrónicos, incluyendo celulares, notebooks, tablets y auriculares. Accesible mediante una aplicación móvil. La plataforma busca mejorar la experiencia de compra en línea, optimizando la navegación, el proceso de compra y el servicio al cliente.
 
 ---
 
@@ -18,13 +18,13 @@ Facilitar la venta de productos electrónicos a través de una aplicación móvi
 
 ### **Para los Clientes (Usuarios Finales)**  
 1. **Registro y Autenticación**  
-   - Opción de registrarse y acceder con email o redes sociales. 
+   - Opción de registrarse y acceder con email. 
    - Activación de cuenta a través del email.
    - Recuperación de contraseña de forma rápida.  
 
 2. **Exploración y Búsqueda de Productos**  
-   - Navegación por categorías: celulares, notebooks, tablets y accesorios.  
-   - Filtros y ordenamientos por marca, precio, disponibilidad, ofertas.  
+   - Navegación por categorías: celulares, notebooks, tablets y auriculares.  
+   - Filtros y ordenamientos por marcas y precios.  
    - Página de producto con imágenes, características técnicas, reseñas y calificaciones.  
 
 3. **Carrito de Compras y Checkout**  
@@ -39,9 +39,7 @@ Facilitar la venta de productos electrónicos a través de una aplicación móvi
 5. **Valoraciones y Opiniones**  
    - Calificar productos comprados y dejar comentarios.  
    - Visualización de las valoraciones de otros clientes para productos específicos.  
-
-6. **Promociones y Ofertas Personalizadas**  
-   - Notificaciones sobre promociones, descuentos y nuevos lanzamientos.  
+ 
 ---
 
 ## 5. **Proceso del Negocio**  
@@ -78,7 +76,7 @@ Facilitar la venta de productos electrónicos a través de una aplicación móvi
 ## 8. **Alcance**  
 
 1. **Alcances Iniciales**  
-   - Venta de productos electrónicos y accesorios exclusivamente.  
+   - Venta de productos electrónicos exclusivamente.  
    - Integración de pagos en línea.
 ---
 
