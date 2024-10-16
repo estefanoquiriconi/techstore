@@ -1,4 +1,4 @@
-# **App de Tienda Electrónica**  
+# **App de Tienda Electrónica TechStore**  
 
 ## 1. **Introducción**  
 Este proyecto propone el desarrollo de una plataforma para la venta de productos electrónicos, incluyendo celulares, notebooks, tablets y auriculares. Accesible mediante una aplicación móvil. La plataforma busca mejorar la experiencia de compra en línea, optimizando la navegación, el proceso de compra y el servicio al cliente.
@@ -82,5 +82,3 @@ Facilitar la venta de productos electrónicos a través de una aplicación móvi
 
 ## 9. **Conclusión**  
 La tienda de productos electrónicos busca ofrecer una experiencia de compra de calidad a sus clientes a través de una aplicación móvil que centralice todo el proceso de compra. El proyecto está enfocado en garantizar un flujo eficiente para los usuarios finales.
-
----
