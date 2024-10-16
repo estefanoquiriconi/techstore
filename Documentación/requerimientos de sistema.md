@@ -19,7 +19,7 @@
 3. **Carrito de compras y proceso de pago**:
    - El sistema debe permitir agregar, modificar y eliminar productos del **carrito de compras**.
    - El sistema debe permitir aplicar **cupones y descuentos** válidos durante la compra.
-   - El sistema debe permitir que los usuarios seleccionen entre varios **métodos de pago** (tarjetas, transferencia, billeteras digitales).
+   - El sistema debe permitir que los usuarios seleccionen entre varios **métodos de pago** (efectivo contra entrega y mercadopago).
    - El sistema debe permitir la confirmación del pedido, mostrando un **resumen** antes del pago.
 
 4. **Pedidos**:
