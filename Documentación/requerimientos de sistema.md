@@ -20,6 +20,7 @@
    - El sistema debe permitir agregar, modificar y eliminar productos del **carrito de compras**.
    - El sistema debe permitir aplicar **cupones y descuentos** válidos durante la compra.
    - El sistema debe permitir que los usuarios seleccionen entre varios **métodos de pago** (efectivo contra entrega y mercadopago).
+   - El sistema debe permitir la sugerencia de dirección en el checkout usando la ubicación del usuario. 
    - El sistema debe permitir la confirmación del pedido, mostrando un **resumen** antes del pago.
 
 4. **Pedidos**:
@@ -119,29 +120,10 @@
 2. **Frontend (Android):**
    - **Java**: Lenguaje principal para desarrollar la aplicación.
    - **Volley o Retrofit**: Librerías para realizar peticiones HTTP hacia el backend.
-   - **SQLite**: Base de datos local para almacenar datos temporales (como el carrito offline).
+   - **SQLite**: Base de datos local para almacenar datos temporales.
 
    **Actividades Principales:**
    - `LoginActivity`: Gestión de inicio de sesión y registro.
    - `ProductListActivity`: Lista de productos por categoría.
    - `ProductDetailActivity`: Detalles del producto.
    - `CartActivity`: Vista del carrito de compras.
-
----
-
-## 6. Arquitectura del Sistema
-
-1. **Cliente (App Android)**: La app maneja la presentación y la interacción con el usuario.
-2. **API RESTful**: Permite la comunicación entre el cliente y el servidor para sincronización de datos.
-3. **Servidor Node.js**: Gestiona la lógica de negocio, como la validación de pedidos y el procesamiento de pagos.
-4. **Base de Datos MySQL**: Almacena la información de usuarios, productos, inventario y pedidos.
-
----
-
-## 7. Proceso de Integración Backend - Frontend
-
-1. **Autenticación**:  
-   - El backend genera tokens JWT y la app los utiliza para validar las sesiones de usuario.
-
-2. **Sincronización de Datos**:  
-   - Cada cambio en el carrito, inventario o pedidos se refleja a través de **peticiones API** para mantener los datos actualizados.
