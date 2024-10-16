@@ -1,7 +1,5 @@
 # REQUERIMIENTOS
 
----
-
 ## 1. Requerimientos Funcionales
 
 1. **Registro y autenticación**:
@@ -13,7 +11,7 @@
 
 2. **Exploración y búsqueda de productos**:
    - El sistema debe permitir a los usuarios navegar por **categorías** (celulares, notebooks, tablets, auriculares).
-   - El sistema debe permitir a los usuarios buscar productos por **palabras clave** y **filtrar** por atributos como marcas, categorías.Ordenar por menor o mayor precio.
+   - El sistema debe permitir a los usuarios buscar productos por **palabras clave** y **filtrar** por atributos como marcas, categorías. Ordenar por menor o mayor precio.
    - El sistema debe mostrar una **pantalla de detalle del producto** que incluya imágenes, descripciones, reseñas y características.
 
 3. **Carrito de compras y proceso de pago**:
@@ -37,7 +35,7 @@
 
 1. **Usabilidad**:
    - El sistema debe proporcionar una **interfaz intuitiva** y de fácil navegación para los usuarios.
-   - El sistema debe ser **responsivo** y funcionar sin problemas en dispositivos Android modernos.
+   - El sistema debe funcionar sin problemas en dispositivos Android modernos.
 
 2. **Rendimiento**:
    - El sistema debe responder rápidamente, manteniendo **tiempos de carga menores a 3 segundos**.
@@ -75,10 +73,10 @@
 
 **Caso de Uso 1: Registro de Usuario**  
 **Actor:** Usuario  
-**Descripción:** Un usuario se registra en la plataforma proporcionando su correo o utilizando una red social.  
+**Descripción:** Un usuario se registra en la plataforma proporcionando su correo electrónico.  
 **Flujo Principal:**  
 1. El usuario accede a la pantalla de registro.
-2. Elige entre correo electrónico o redes sociales.
+2. Ingresa su correo electrónico
 3. Completa los datos y confirma el registro.
 4. El sistema envía un correo para activar la cuenta.
 5. El usuario activa su cuenta mediante el enlace enviado.
@@ -92,7 +90,7 @@
 1. El usuario accede a la lista de productos.
 2. Selecciona una categoría.
 3. Ingresa una palabra clave en el buscador.
-4. Aplica filtros de precio, marca y ofertas.
+4. Aplica filtros de marcas, ordenar por menor o mayor precio.
 5. Visualiza los resultados filtrados.
 
 ---
@@ -127,3 +125,4 @@
    - `ProductListActivity`: Lista de productos por categoría.
    - `ProductDetailActivity`: Detalles del producto.
    - `CartActivity`: Vista del carrito de compras.
+   - `ProfileActivity`: Vista del perfil del usuario.
