@@ -35,23 +35,6 @@ TechStore es una aplicación móvil diseñada para ofrecer una experiencia efici
 
 ---
 
-## **Requerimientos**  
-
-### **Requerimientos Funcionales**  
-- El sistema debe permitir el registro de usuarios y la autenticación con email.  
-- El sistema debe permitir la búsqueda de productos por palabra clave, categorías y filtros.  
-- El sistema debe permitir al usuario agregar productos al carrito y gestionar su contenido.  
-- El sistema debe permitir la sugerencia de dirección en el checkout usando la ubicación del usuario.  
-- El sistema debe manejar el estado de los pedidos y mostrar el historial.
-
-### **Requerimientos No Funcionales**  
-- **Usabilidad:** La interfaz debe ser intuitiva y fácil de usar.  
-- **Rendimiento:** Las operaciones críticas deben realizarse en menos de 3 segundos.  
-- **Seguridad:** Los datos sensibles deben ser encriptados.  
-- **Escalabilidad:** El sistema debe soportar un crecimiento de usuarios y productos.
-
----
-
 ## **Uso**
 1. **Registro e Inicio de Sesión:** Crea una cuenta o ingresa usando tus credenciales.  
 2. **Explora Productos:** Navega por categorías o busca productos específicos.  
@@ -75,10 +58,10 @@ TechStore es una aplicación móvil diseñada para ofrecer una experiencia efici
   Maneja la interfaz de usuario y la interacción con el usuario.
 
 - **API RESTful (Node.js + Express):**  
-  Provee servicios para la autenticación, gestión del carrito y pedidos.
+  Provee servicios para la autenticación, productos, gestión de pedidos, etc.
 
 - **Base de Datos (MySQL):**  
-  Almacena usuarios, productos, pedidos y reseñas.
+  Almacena usuarios, productos, marcas, categorias, pedidos y reseñas.
 
 ---
 
