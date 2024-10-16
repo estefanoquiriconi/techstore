@@ -1,6 +1,19 @@
 ## **TechStore**  🎧📱💻✨
 Una aplicación de tienda electrónica donde los usuarios pueden explorar, comprar y gestionar pedidos de productos tecnológicos.
 
+## Organización del Proyecto
+
+Para gestionar el desarrollo de este proyecto, estoy utilizando metodologías ágiles.
+
+- [Ver el tablero de Trello](https://trello.com/invite/b/670ecde80c302a900d729363/ATTIc9fc1f9e6c12a260df39bc6f5e0fd0ae21417E55/techstore)
+
+## Diseño de Pantallas
+
+El diseño de las pantallas del proyecto los estoy haciendo en Figma.
+
+- [Ver el diseño en Figma](https://www.figma.com/design/BsdnPBZP3NZTDnVg6WEO3Q/TechStore?node-id=0-1&t=C1ntNFAqxwwoWwIK-1)
+
+
 ---
 
 ### **Tabla de Contenidos**  
