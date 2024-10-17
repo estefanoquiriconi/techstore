@@ -29,7 +29,7 @@ Facilitar la venta de productos electrónicos a través de una aplicación móvi
 
 3. **Carrito de Compras y Checkout**  
    - Agregar productos al carrito con la posibilidad de modificar cantidades.  
-   - Resumen del pedido con opción de aplicar cupones o descuentos.  
+   - Resumen del pedido.
    - Confirmación del pedido y selección del método de pago.  
 
 4. **Pedidos**  
@@ -43,7 +43,7 @@ Facilitar la venta de productos electrónicos a través de una aplicación móvi
 ---
 
 ## 5. **Proceso del Negocio**  
-1. **Registro de Clientes**: Los usuarios deben registrarse para realizar pedidos, consultar el estado de sus compras y recibir promociones.  
+1. **Registro de Clientes**: Los usuarios deben registrarse para realizar pedidos, consultar el estado de sus compras.  
 
 2. **Exploración y Selección de Productos**: Los clientes navegan por categorías o buscan productos específicos. Pueden filtrar resultados y leer reseñas antes de agregar productos al carrito.  
 
