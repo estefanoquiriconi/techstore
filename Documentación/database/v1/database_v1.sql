@@ -78,14 +78,3 @@ CREATE TABLE reviews (
     FOREIGN KEY (product_id) REFERENCES products(id),
     UNIQUE (user_id, product_id)
 );
-
-CREATE TABLE coupons (
-    id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    code VARCHAR(50) UNIQUE,
-    discount DECIMAL(5, 2),
-    uses INT DEFAULT 0,
-    max_uses INT DEFAULT 1,
-    start_date TIMESTAMP,
-    end_date TIMESTAMP,
-    active BOOLEAN DEFAULT TRUE
-);

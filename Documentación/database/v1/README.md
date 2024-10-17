@@ -1,7 +1,7 @@
 # Documentación de la base de datos
 
 ## Descripción general
-La base de datos `techstore_db` está diseñada para gestionar una tienda en línea de productos tecnológicos. Incluye funcionalidades para manejar usuarios, productos, categorías, marcas, pedidos, reseñas y cupones.
+La base de datos `techstore_db` está diseñada para gestionar una tienda en línea de productos tecnológicos. Incluye funcionalidades para manejar usuarios, productos, categorías, marcas, pedidos y reseñas.
 
 ## Estructura de la base de datos
 
@@ -94,20 +94,6 @@ Contiene las reseñas de los productos realizadas por los usuarios.
 | created_at | TIMESTAMP | Fecha de creación de la reseña |
 | updated_at | TIMESTAMP | Fecha de última actualización |
 
-### Tabla: coupons
-Almacena información sobre cupones de descuento.
-
-| Columna | Tipo | Descripción |
-|---------|------|-------------|
-| id | BIGINT | Clave primaria, autoincremental |
-| code | VARCHAR(50) | Código del cupón (único) |
-| discount | DECIMAL(5, 2) | Porcentaje de descuento |
-| uses | INT | Número de veces que se ha usado el cupón |
-| max_uses | INT | Número máximo de usos permitidos |
-| start_date | TIMESTAMP | Fecha de inicio de validez |
-| end_date | TIMESTAMP | Fecha de fin de validez |
-| active | BOOLEAN | Estado del cupón (activo/inactivo) |
-
 ## Relaciones entre tablas
 
 1. `products` tiene claves foráneas a `brands` (brand_id) y `categories` (category_id).
@@ -122,4 +108,3 @@ Almacena información sobre cupones de descuento.
 - La tabla `orders` utiliza un ENUM para el estado del pedido, limitando los valores posibles.
 - La tabla `order_details` incluye un campo calculado `subtotal` basado en la cantidad y el precio.
 - La tabla `reviews` tiene una restricción UNIQUE para evitar múltiples reseñas del mismo usuario para el mismo producto.
-- La tabla `coupons` permite gestionar descuentos con límites de uso y fechas de validez.
