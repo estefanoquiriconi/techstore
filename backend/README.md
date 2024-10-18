@@ -4,7 +4,7 @@ Este es el backend para la aplicación de comercio electrónico **TechStore**. E
 
 ## Funcionalidades
 
-- API RESTful para gestionar usuarios, productos, categorías, marcas, pedidos, reseñas y cupones.
+- API RESTful para gestionar usuarios, productos, categorías, marcas, pedidos y reseñas.
 - Integración con la base de datos MySQL utilizando Sequelize ORM.
 - Configuración basada en entornos.
 
@@ -62,7 +62,6 @@ El servidor se ejecutará en el puerto especificado en tu archivo `.env` (por de
 - **Productos**: `/api/products`
 - **Pedidos**: `/api/orders`
 - **Reseñas**: `/api/reviews`
-- **Cupones**: `/api/coupons`
 
 Cada recurso soporta las operaciones CRUD estándar:
 
@@ -83,4 +82,3 @@ La base de datos incluye las siguientes tablas:
 - `orders`
 - `order_details`
 - `reviews`
-- `coupons`
