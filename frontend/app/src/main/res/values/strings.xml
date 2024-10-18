@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">Frontend</string>
+    <string name="logo_ts">logoTechStore</string>
+    <string name="name_label">Nombre</string>
+    <string name="email_label">Correo electrónico</string>
+    <string name="password_label">Contraseña</string>
+    <string name="new_password_label">Nueva contraseña</string>
+    <string name="confirm_password_label">Confirmar contraseña</string>
+    <string name="change_password">Cambiar contraseña</string>
+    <string name="recover_password_message">Por favor ingrese su dirección de correo electrónico. Recibirá un link para crear una nueva contraseña.</string>
+    <string name="register">Registrarse</string>
+    <string name="sign_in">Iniciar sesión</string>
+    <string name="send_button">Enviar</string>
+    <string name="already_have_account">Ya tienes una cuenta?</string>
+    <string name="forgot_password">Has olvidado tu contraseña</string>
+    <string name="no_account">No tienes una cuenta? <font color="#FF000000">Registrarse</font></string>
+    <string name="forgot_password_question">¿Olvidó su contraseña?</string>
+    <string name="password_reset_message">¡Tu contraseña ha sido restablecida!</string>
+    <string name="done">Hecho</string>
+    <string name="enter_new_password">Ingresa una nueva contraseña y confírmala.</string>
+    <string name="sign_out">Cerrar sesión</string>
 </resources>
