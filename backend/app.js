@@ -5,6 +5,8 @@ const brandRoutes = require('./routes/brands.routes');
 const productRoutes = require('./routes/products.routes');
 const orderRoutes = require('./routes/orders.routes');
 const reviewRoutes = require('./routes/reviews.routes');
+const authRoutes = require('./routes/auth.routes');
+const { errorHandler } = require('./middlewares/errorHandler')
 
 const app = express();
 app.use(express.json());
@@ -15,6 +17,9 @@ app.use('/api/brands', brandRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/reviews', reviewRoutes);
+app.use('/api/auth', authRoutes);
+
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;
 
