@@ -5,7 +5,6 @@ const Product = require('./product');
 const Order = require('./order');
 const OrderDetail = require('./orderDetail');
 const Review = require('./review');
-const Coupon = require('./coupon');
 
 Product.belongsTo(Brand, { foreignKey: 'brand_id'});
 Product.belongsTo(Category, { foreignKey: 'category_id'});
@@ -26,5 +25,4 @@ module.exports = {
   Order,
   OrderDetail,
   Review,
-  Coupon
 };
