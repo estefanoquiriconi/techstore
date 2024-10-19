@@ -28,7 +28,7 @@
 5. **Valoraciones y reseñas**:
    - El sistema debe permitir a los usuarios dejar **valoraciones** y **comentarios** sobre los productos comprados.
    - El sistema debe mostrar las valoraciones de otros usuarios para cada producto.
-   - 
+   
 6. **Almacenamiento de direcciones y uso de Google Maps**:  
    - El sistema debe integrar **Google Maps**.  
    - El sistema debe permitir al usuario **almacenar múltiples direcciones** (ejemplo: "Casa", "Trabajo", "Otra dirección").  
@@ -59,7 +59,7 @@
 ## 3. Historias de Usuario
 
 1. **Historia de Registro**:  
-   - Como usuario nuevo, quiero registrarme utilizando mi correo electrónico para acceder a todas las funcionalidades de la tienda.
+   - **Como** usuario nuevo, **quiero** registrarme utilizando mi correo electrónico **para** acceder a todas las funcionalidades de la tienda.
 
 2. **Historia de Exploración**:  
    - Como usuario, quiero buscar productos por categorías, marcas y ordenar resultados por precio, para encontrar rápidamente lo que necesito.
@@ -73,10 +73,8 @@
 5. **Historia de Valoración**:  
    - Como usuario, quiero calificar los productos que compré para ayudar a otros usuarios con sus decisiones.
      
-6. **Almacenamiento de Direcciones**  
-      **Como** usuario de la aplicación,  
-      **quiero** guardar varias direcciones y seleccionar una en el checkout,  
-      **para** facilitar el proceso de compra y no tener que ingresar la dirección cada vez.  
+6. **Historia de Almacenamiento de Direcciones**  
+   - Como usuario de la aplicación, quiero guardar varias direcciones y seleccionar una en el checkout, para facilitar el proceso de compra y no tener que ingresar la dirección cada vez.  
 
 ---
 
@@ -92,7 +90,6 @@
 4. El sistema envía un correo para activar la cuenta.
 5. El usuario activa su cuenta mediante el enlace enviado.
 
----
 
 **Caso de Uso 2: Búsqueda y Filtro de Productos**  
 **Actor:** Usuario  
@@ -104,7 +101,6 @@
 4. Aplica filtros de marcas, ordenar por menor o mayor precio.
 5. Visualiza los resultados filtrados.
 
----
 
 **Caso de Uso 3: Proceso de Pago**  
 **Actor:** Usuario  
@@ -116,7 +112,6 @@
 4. Confirma la compra.
 5. El sistema muestra un resumen del pedido.
 
----
 
 **Caso de Uso 4: Almacenamiento de Direcciones y Uso de Google Maps**  
 **Actor:** Usuario  
