@@ -1,5 +1,5 @@
 const User = require('../models/user')
-const { createToken } = require('../services/security/createToken')
+const { createToken } = require('../services/token/createToken')
 const {notFoundError, notAuthorizedError,forbiddenError} = require('../helpers/error.helper')
 
 
