@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer')
 const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS } = process.env
-const errors = require('./errors.helper')
+const errors = require('./error.helper')
 
 const transporter = nodemailer.createTransport({
     host: SMTP_HOST,

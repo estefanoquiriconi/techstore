@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path')
 const userRoutes = require('./routes/users.routes');
 const categoryRoutes = require('./routes/categories.routes');
 const brandRoutes = require('./routes/brands.routes');
@@ -10,6 +11,7 @@ const { errorHandler } = require('./middlewares/errors/errorHandler')
 
 const app = express();
 app.use(express.json());
+app.use(express.static(path.resolve('./public')))
 
 app.use('/api/users', userRoutes);
 app.use('/api/categories', categoryRoutes);
