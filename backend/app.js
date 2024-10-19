@@ -6,7 +6,7 @@ const productRoutes = require('./routes/products.routes');
 const orderRoutes = require('./routes/orders.routes');
 const reviewRoutes = require('./routes/reviews.routes');
 const authRoutes = require('./routes/auth.routes');
-const { errorHandler } = require('./middlewares/errorHandler')
+const { errorHandler } = require('./middlewares/errors/errorHandler')
 
 const app = express();
 app.use(express.json());
