@@ -1,0 +1,80 @@
+package com.example.frontend.ui.login;
+
+import android.app.AlertDialog;
+import android.os.Bundle;
+import android.util.Patterns;
+import android.view.View;
+import android.widget.Toast;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.example.frontend.R;
+import com.example.frontend.databinding.ActivityLoginBinding;
+import com.example.frontend.utils.InputValidator;
+
+import java.util.Objects;
+
+public class LoginActivity extends AppCompatActivity {
+
+    private ActivityLoginBinding binding;
+    private LoginViewModel loginViewModel;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        setWindowInsets();
+
+        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+        observerViewModel();
+
+        binding.btnLogin.setOnClickListener(v -> {
+            if (InputValidator.isEmpty(binding.editTextEmail, "Por favor, ingresa tu email \uD83D\uDE0A"))
+                return;
+            if (InputValidator.isInvalidEmail(binding.editTextEmail, "Verifica tu email, algo no está bien \uD83D\uDE05"))
+                return;
+            if (InputValidator.isEmpty(binding.editTextPassword, "¡Ups! Falta la contraseña \uD83D\uDD12"))
+                return;
+
+            String email = binding.editTextEmail.getText().toString().trim();
+            String password = binding.editTextPassword.getText().toString().trim();
+            loginViewModel.login(email, password);
+        });
+
+    }
+
+    public void observerViewModel() {
+        loginViewModel.getLoginResponse().observe(this, response -> {
+            if (response != null) {
+                //TODO
+                Toast.makeText(this, "Login exitoso" + response.getToken(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        loginViewModel.getErrorMessage().observe(this, error -> {
+            if (error != null) {
+                new AlertDialog.Builder(this)
+                        .setTitle("Error")
+                        .setMessage("Por favor, verificá los datos ingresados \uD83D\uDE15")
+                        .setIcon(R.drawable.ic_warning)
+                        .setPositiveButton("Entendido", (dialog, which) -> dialog.dismiss())
+                        .show();
+            }
+        });
+    }
+
+    public void setWindowInsets() {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+    }
+}
