@@ -28,7 +28,13 @@
 5. **Valoraciones y reseñas**:
    - El sistema debe permitir a los usuarios dejar **valoraciones** y **comentarios** sobre los productos comprados.
    - El sistema debe mostrar las valoraciones de otros usuarios para cada producto.
-
+   - 
+6. **Almacenamiento de direcciones y uso de Google Maps**:  
+   - El sistema debe integrar **Google Maps**.  
+   - El sistema debe permitir al usuario **almacenar múltiples direcciones** (ejemplo: "Casa", "Trabajo", "Otra dirección").  
+   - El sistema debe permitir que el usuario **seleccione una dirección guardada** para usarla como dirección de entrega.   
+   - El usuario debe poder **editar, agregar o eliminar direcciones** desde su perfil.
+   - 
 ---
 
 ## 2. Requerimientos No Funcionales
@@ -66,6 +72,11 @@
 
 5. **Historia de Valoración**:  
    - Como usuario, quiero calificar los productos que compré para ayudar a otros usuarios con sus decisiones.
+     
+6. **Almacenamiento de Direcciones**  
+      **Como** usuario de la aplicación,  
+      **quiero** guardar varias direcciones y seleccionar una en el checkout,  
+      **para** facilitar el proceso de compra y no tener que ingresar la dirección cada vez.  
 
 ---
 
@@ -107,6 +118,22 @@
 
 ---
 
+**Caso de Uso 4: Almacenamiento de Direcciones y Uso de Google Maps**  
+**Actor:** Usuario  
+**Descripción:** El usuario gestiona y selecciona direcciones guardadas para usarlas durante el checkout utilizando la integración con Google Maps.  
+**Flujo Principal:**  
+1. El usuario accede al **perfil** y selecciona la opción **"Mis Direcciones"**.  
+2. El usuario hace clic en **"Agregar Nueva Dirección"**.  
+3. La aplicación sugiere la dirección basada en la **ubicación actual del dispositivo** mediante Google Maps.  
+4. El usuario puede **aceptar la sugerencia** o **buscar manualmente una dirección** en el mapa.  
+5. El usuario guarda la dirección asignando un **nombre** (por ejemplo, "Casa" o "Trabajo").  
+6. Durante el proceso de checkout, el sistema muestra las **direcciones guardadas**.  
+7. El usuario selecciona una dirección para la **entrega del pedido**.  
+8. La dirección elegida se muestra en el **resumen del pedido**.  
+9. Si el usuario necesita realizar cambios, puede **editar o eliminar** una dirección desde el perfil.
+
+---
+
 ## 5. Componentes Técnicos
 
 1. **Backend:**
@@ -117,7 +144,7 @@
 
 2. **Frontend (Android):**
    - **Java**: Lenguaje principal para desarrollar la aplicación.
-   - **Volley o Retrofit**: Librerías para realizar peticiones HTTP hacia el backend.
+   - **Retrofit**: Librerías para realizar peticiones HTTP hacia el backend.
    - **SQLite**: Base de datos local para almacenar datos temporales.
 
    **Actividades Principales:**
