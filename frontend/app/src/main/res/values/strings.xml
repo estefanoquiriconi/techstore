@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Frontend</string>
     <string name="logo_ts">logoTechStore</string>
-    <string name="name_label">Nombre</string>
+    <string name="first_name_label">Nombre</string>
+    <string name="last_name_label">Apellido</string>
     <string name="email_label">Correo electrónico</string>
     <string name="password_label">Contraseña</string>
     <string name="new_password_label">Nueva contraseña</string>
@@ -11,7 +12,7 @@
     <string name="register">Registrarse</string>
     <string name="sign_in">Iniciar sesión</string>
     <string name="send_button">Enviar</string>
-    <string name="already_have_account">Ya tienes una cuenta?</string>
+    <string name="already_have_account">Ya tienes una cuenta? <font color="#FF000000">Iniciar sesión</font></string>
     <string name="forgot_password">Has olvidado tu contraseña</string>
     <string name="no_account">No tienes una cuenta? <font color="#FF000000">Registrarse</font></string>
     <string name="forgot_password_question">¿Olvidó su contraseña?</string>

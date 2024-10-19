@@ -1,6 +1,6 @@
 package com.example.frontend.data.models;
 
-public class LoginResponse {
+public class ApiResponse {
 
     private String status;
     private String message;

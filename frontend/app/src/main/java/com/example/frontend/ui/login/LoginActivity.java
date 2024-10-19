@@ -4,9 +4,6 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Patterns;
-import android.view.View;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,9 +15,8 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.frontend.MainActivity;
 import com.example.frontend.R;
 import com.example.frontend.databinding.ActivityLoginBinding;
+import com.example.frontend.ui.register.RegisterActivity;
 import com.example.frontend.utils.InputValidator;
-
-import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -51,10 +47,18 @@ public class LoginActivity extends AppCompatActivity {
             loginViewModel.login(email, password);
         });
 
+        binding.tvForgotPassword.setOnClickListener(v -> {
+            //TODO
+        });
+
+        binding.tvRegister.setOnClickListener(v -> {
+            startActivity(new Intent(this, RegisterActivity.class));
+        });
+
     }
 
     public void observerViewModel() {
-        loginViewModel.getLoginResponse().observe(this, response -> {
+        loginViewModel.getApiResponse().observe(this, response -> {
             if (response != null) {
                 saveToken(response.getToken());
                 startActivity(new Intent(this, MainActivity.class));
@@ -73,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void saveToken(String token){
+    public void saveToken(String token) {
         SharedPreferences sharedPreferences = getSharedPreferences("user_tokens", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("auth_token", token);

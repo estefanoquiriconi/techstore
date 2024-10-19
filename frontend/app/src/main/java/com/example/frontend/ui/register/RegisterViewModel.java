@@ -1,12 +1,11 @@
-package com.example.frontend.ui.login;
+package com.example.frontend.ui.register;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.frontend.data.models.LoginRequest;
 import com.example.frontend.data.models.ApiResponse;
+import com.example.frontend.data.models.RegisterRequest;
 import com.example.frontend.data.services.AuthService;
 import com.example.frontend.utils.RetrofitClient;
 
@@ -14,34 +13,36 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginViewModel extends ViewModel {
+public class RegisterViewModel extends ViewModel {
 
     private final AuthService authService;
     private final MutableLiveData<ApiResponse> apiResponse = new MutableLiveData<>();
     private final MutableLiveData<String> errorMessage = new MutableLiveData<>();
 
-    public LoginViewModel() {
-        authService = RetrofitClient.getClient()
-                .create(AuthService.class);
+    public RegisterViewModel() {
+        this.authService = RetrofitClient.getClient().create(AuthService.class);
     }
 
-    public LiveData<ApiResponse> getApiResponse() {
+    public MutableLiveData<ApiResponse> getApiResponse() {
         return apiResponse;
     }
 
-    public LiveData<String> getErrorMessage() {
+    public MutableLiveData<String> getErrorMessage() {
         return errorMessage;
     }
 
-    public void login(String email, String password) {
-        LoginRequest request = new LoginRequest(email, password);
+    public void register(String last_name, String first_name, String email, String password){
+        RegisterRequest request = new RegisterRequest(last_name, first_name, email, password);
 
-        authService.login(request).enqueue(new Callback<ApiResponse>() {
+        authService.register(request).enqueue(new Callback<ApiResponse>() {
             @Override
             public void onResponse(@NonNull Call<ApiResponse> call, @NonNull Response<ApiResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     apiResponse.postValue(response.body());
-                } else {
+                }
+                if(response.code() == 409){
+                    errorMessage.postValue("El email ya está registrado.");
+                }else {
                     errorMessage.postValue("Por favor, verificá los datos ingresados.");
                 }
             }
@@ -52,4 +53,5 @@ public class LoginViewModel extends ViewModel {
             }
         });
     }
+
 }
