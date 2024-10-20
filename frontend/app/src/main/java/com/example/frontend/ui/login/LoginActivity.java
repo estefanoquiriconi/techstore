@@ -63,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
             if (response != null) {
                 saveToken(response.getToken());
                 startActivity(new Intent(this, MainActivity.class));
+                finish();
             }
         });
 

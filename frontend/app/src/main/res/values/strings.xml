@@ -20,4 +20,7 @@
     <string name="done">Hecho</string>
     <string name="enter_new_password">Ingresa una nueva contraseña y confírmala.</string>
     <string name="sign_out">Cerrar sesión</string>
+    <string name="activate_info">Por favor ingrese el código que recibió por correo electrónico para poder activar su cuenta</string>
+    <string name="activate_label">Código de activación</string>
+    <string name="activate">Activar</string>
 </resources>

@@ -13,7 +13,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.frontend.MainActivity;
 import com.example.frontend.R;
 import com.example.frontend.databinding.ActivityRegisterBinding;
 import com.example.frontend.ui.login.LoginActivity;
@@ -36,6 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         binding.tvSignIn.setOnClickListener(v -> {
             startActivity(new Intent(this, LoginActivity.class));
+            finish();
         });
 
         binding.btnRegister.setOnClickListener(v -> {
@@ -53,7 +53,8 @@ public class RegisterActivity extends AppCompatActivity {
     public void observerViewModel() {
         registerViewModel.getApiResponse().observe(this, response -> {
             if (response != null) {
-                //TODO
+                startActivity(new Intent(this, ActivateAccountActivity.class));
+                finish();
             }
         });
 
