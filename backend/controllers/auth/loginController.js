@@ -20,8 +20,8 @@ const login = async (req, res, next) => {
 
 
         if (!user?.active) {
-            const errorMessage = user?.registrationCode ? 'El usuario aún no fue activado' : 'El usuario está desactivado';
-            forbiddenError(errorMessage, user?.registrationCode ? 'PENDING_ACTIVATION' : 'USER_INACTIVE');
+            const errorMessage = user?.registration_code ? 'El usuario aún no fue activado' : 'El usuario está desactivado';
+            forbiddenError(errorMessage, user?.registration_code ? 'PENDING_ACTIVATION' : 'USER_INACTIVE');
         }
 
         const payload = {
