@@ -1,7 +1,6 @@
 package com.example.frontend.ui.login;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -21,15 +20,14 @@ public class LoginViewModel extends ViewModel {
     private final MutableLiveData<String> errorMessage = new MutableLiveData<>();
 
     public LoginViewModel() {
-        authService = RetrofitClient.getClient()
-                .create(AuthService.class);
+        authService = RetrofitClient.getClient().create(AuthService.class);
     }
 
-    public LiveData<ApiResponse> getApiResponse() {
+    public MutableLiveData<ApiResponse> getApiResponse() {
         return apiResponse;
     }
 
-    public LiveData<String> getErrorMessage() {
+    public MutableLiveData<String> getErrorMessage() {
         return errorMessage;
     }
 
@@ -41,7 +39,10 @@ public class LoginViewModel extends ViewModel {
             public void onResponse(@NonNull Call<ApiResponse> call, @NonNull Response<ApiResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     apiResponse.postValue(response.body());
-                } else {
+                }
+                if(response.code() == 403){
+                    errorMessage.postValue("Activación pendiente");
+                }else {
                     errorMessage.postValue("Por favor, verificá los datos ingresados.");
                 }
             }

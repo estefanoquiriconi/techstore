@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.frontend.MainActivity;
 import com.example.frontend.R;
 import com.example.frontend.databinding.ActivityLoginBinding;
+import com.example.frontend.ui.register.ActivateAccountActivity;
 import com.example.frontend.ui.register.RegisterActivity;
 import com.example.frontend.utils.InputValidator;
 
@@ -67,12 +68,23 @@ public class LoginActivity extends AppCompatActivity {
 
         loginViewModel.getErrorMessage().observe(this, error -> {
             if (error != null) {
-                new AlertDialog.Builder(this)
-                        .setTitle("Error")
-                        .setMessage("Por favor, verificá los datos ingresados.")
-                        .setIcon(R.drawable.ic_warning)
-                        .setPositiveButton("Entendido", (dialog, which) -> dialog.dismiss())
-                        .show();
+                if (error.equals("Activación pendiente")) {
+                    new AlertDialog.Builder(this)
+                            .setTitle("Error")
+                            .setMessage(error)
+                            .setIcon(R.drawable.ic_warning)
+                            .setPositiveButton("Activar", (dialog, which) -> {
+                                startActivity(new Intent(this, ActivateAccountActivity.class));
+                            })
+                            .show();
+                } else {
+                    new AlertDialog.Builder(this)
+                            .setTitle("Error")
+                            .setMessage(error)
+                            .setIcon(R.drawable.ic_warning)
+                            .setPositiveButton("Entendido", (dialog, which) -> dialog.dismiss())
+                            .show();
+                }
             }
         });
     }
