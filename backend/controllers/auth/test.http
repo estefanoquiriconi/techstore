@@ -17,3 +17,11 @@ Content-Type: application/json
   "first_name" : "Estéfano",
   "last_name": "Quiriconi"
 }
+
+### Probar el endpint para activar una cuenta
+POST http://localhost:3000/api/auth/active
+Content-Type: application/json
+
+{
+  "registration_code" : "C6423A54"
+}

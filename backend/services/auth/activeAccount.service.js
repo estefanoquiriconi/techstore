@@ -6,7 +6,7 @@ const activeAccount = async (user) => {
         await User.update(
             {
                 active: true,
-                registrationCode: null
+                registration_code: null
             },
             { where: { id: user.id } }
         )

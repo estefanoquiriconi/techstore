@@ -31,7 +31,7 @@ const User = sequelize.define('User', {
   },
   active: {
     type: DataTypes.BOOLEAN,
-    defaultValue: true
+    defaultValue: false
   },
   registration_code: {
     type: DataTypes.STRING(50)

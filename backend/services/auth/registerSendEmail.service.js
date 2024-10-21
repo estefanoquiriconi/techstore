@@ -1,7 +1,6 @@
 const { sendMail } = require('../../helpers/email.helper');
-const { APP_BASE_URL } = process.env;
 
-const registerSendEmail = async (firstName, lastName, email, registrationCode) => {
+const registerSendEmail = async (firstName, email, registrationCode) => {
     const subject = 'Bienvenido a TechStore - Activa tu cuenta';
 
     const body = `
