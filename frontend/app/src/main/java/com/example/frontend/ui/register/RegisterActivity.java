@@ -52,7 +52,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void observerViewModel() {
         registerViewModel.getApiResponse().observe(this, response -> {
-            if (response != null) {
+            if (response != null && response.getStatus().equals("success")) {
                 startActivity(new Intent(this, ActivateAccountActivity.class));
                 finish();
             }

@@ -31,7 +31,7 @@ public class RegisterViewModel extends ViewModel {
         return errorMessage;
     }
 
-    public void register(String last_name, String first_name, String email, String password){
+    public void register(String last_name, String first_name, String email, String password) {
         RegisterRequest request = new RegisterRequest(last_name, first_name, email, password);
 
         authService.register(request).enqueue(new Callback<ApiResponse>() {
@@ -39,10 +39,9 @@ public class RegisterViewModel extends ViewModel {
             public void onResponse(@NonNull Call<ApiResponse> call, @NonNull Response<ApiResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     apiResponse.postValue(response.body());
-                }
-                if(response.code() == 409){
+                } else if (response.code() == 409) {
                     errorMessage.postValue("El email ya está registrado.");
-                }else {
+                } else {
                     errorMessage.postValue("Por favor, verificá los datos ingresados.");
                 }
             }

@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void observerViewModel() {
         loginViewModel.getApiResponse().observe(this, response -> {
-            if (response != null) {
+            if (response != null && response.getStatus().equals("success")) {
                 saveToken(response.getToken());
                 startActivity(new Intent(this, MainActivity.class));
                 finish();
@@ -71,11 +71,12 @@ public class LoginActivity extends AppCompatActivity {
             if (error != null) {
                 if (error.equals("Activación pendiente")) {
                     new AlertDialog.Builder(this)
-                            .setTitle("Error")
+                            .setTitle("Advertencia")
                             .setMessage(error)
                             .setIcon(R.drawable.ic_warning)
                             .setPositiveButton("Activar", (dialog, which) -> {
                                 startActivity(new Intent(this, ActivateAccountActivity.class));
+                                finish();
                             })
                             .show();
                 } else {

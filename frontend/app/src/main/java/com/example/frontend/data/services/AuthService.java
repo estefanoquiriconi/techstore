@@ -1,5 +1,6 @@
 package com.example.frontend.data.services;
 
+import com.example.frontend.data.models.ActivateAccountRequest;
 import com.example.frontend.data.models.LoginRequest;
 import com.example.frontend.data.models.ApiResponse;
 import com.example.frontend.data.models.RegisterRequest;
@@ -14,4 +15,7 @@ public interface AuthService {
 
     @POST("api/auth/register")
     Call<ApiResponse> register(@Body RegisterRequest registerRequest);
+
+    @POST("api/auth/activate")
+    Call<ApiResponse> activateAccount(@Body ActivateAccountRequest activateRequest);
 }
