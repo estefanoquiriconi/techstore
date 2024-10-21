@@ -1,7 +1,7 @@
 const User = require('../../models/user')
 const { internalServerError } = require('../../helpers/error.helper')
 
-const activeAccount = async (user) => {
+const activate = async (user) => {
     try {
         await User.update(
             {
@@ -15,4 +15,4 @@ const activeAccount = async (user) => {
     }
 }
 
-module.exports = { activeAccount }
+module.exports = { activate }

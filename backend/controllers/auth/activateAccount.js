@@ -3,7 +3,7 @@ const authService = require('../../services/auth/index.service');
 const { validationResult } = require('express-validator');
 const { notFoundError, badRequestError } = require('../../helpers/error.helper');
 
-const activeAccount = async (req, res, next) => {
+const activateAccount = async (req, res, next) => {
     try {
         const errors = validationResult(req);
         if (!errors.isEmpty()) badRequestError(errors.array());
@@ -13,7 +13,7 @@ const activeAccount = async (req, res, next) => {
         const user = await User.findOne({ where: { registration_code } });
         if (!user) notFoundError("Usuario no encontrado", "USER_NOT_FOUND");
 
-        authService.activeAccount(user);
+        authService.activate(user);
 
         res.status(200).json({
             status: "success",
@@ -24,6 +24,6 @@ const activeAccount = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
-}
+};
 
-module.exports = { activeAccount }
+module.exports = { activateAccount }
