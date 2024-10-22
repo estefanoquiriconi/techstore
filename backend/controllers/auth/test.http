@@ -18,10 +18,26 @@ Content-Type: application/json
   "last_name": "Quiriconi"
 }
 
-### Probar el endpint para activar una cuenta
-POST http://localhost:3000/api/auth/active
+### Probar el endpoint para activar una cuenta
+POST http://localhost:3000/api/auth/activate
 Content-Type: application/json
 
 {
   "registration_code" : "C6423A54"
+}
+
+### Probar el endpoint para pedir el código de recuperación
+POST http://localhost:3000/api/auth/recover-password
+Content-Type: application/json
+
+{
+  "email" : "estefanoquiriconi@gmail.com"
+}
+
+### Probar el endpoint para verificar el código de recuperación
+POST http://localhost:3000/api/auth/verify-recover-code
+Content-Type: application/json
+
+{
+  "recoverpass_code" : "BDD5CF95"
 }
