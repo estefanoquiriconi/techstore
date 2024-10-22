@@ -3,6 +3,7 @@ package com.example.frontend.data.services;
 import com.example.frontend.data.models.ActivateAccountRequest;
 import com.example.frontend.data.models.LoginRequest;
 import com.example.frontend.data.models.ApiResponse;
+import com.example.frontend.data.models.RecoverPasswordRequest;
 import com.example.frontend.data.models.RegisterRequest;
 
 import retrofit2.Call;
@@ -18,4 +19,7 @@ public interface AuthService {
 
     @POST("api/auth/activate")
     Call<ApiResponse> activateAccount(@Body ActivateAccountRequest activateRequest);
+
+    @POST("api/auth/recover-password")
+    Call<ApiResponse> recoverPassword(@Body RecoverPasswordRequest recoverPasswordRequest);
 }

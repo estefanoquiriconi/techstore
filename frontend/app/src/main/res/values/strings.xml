@@ -23,4 +23,9 @@
     <string name="activate_info">Por favor ingrese el código que recibió por correo electrónico para poder activar su cuenta</string>
     <string name="activate_label">Código de activación</string>
     <string name="activate">Activar</string>
+    <string name="verification_code_label">Código de verificación</string>
+    <string name="verify">Verificar</string>
+    <string name="verification_code_info">Por favor ingrese el códido que recibió por correo electrónico para poder actualizar su contraseña</string>
+    <string name="forgot_password_title">Olvidaste tu contraseña</string>
+    <string name="forgot_password_info">Por favor ingrese su dirección de correo electrónico. Recibirá un código para poder crear una nueva contraseña</string>
 </resources>

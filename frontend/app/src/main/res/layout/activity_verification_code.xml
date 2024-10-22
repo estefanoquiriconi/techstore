@@ -5,8 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.register.ActivateAccountActivity">
-
+    tools:context=".ui.recover.VerificationCodeActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -29,7 +28,6 @@
                     android:layout_height="match_parent"
                     android:clickable="true"
                     android:focusable="true"
-                    android:onClick="goBack"
                     app:srcCompat="@drawable/ic_back_16"
                     tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -37,7 +35,7 @@
                     android:id="@+id/tvBar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@string/activate_label"
+                    android:text="@string/verification_code_label"
                     android:gravity="center"
                     android:fontFamily="@font/montserrat_bold"
                     android:textSize="@dimen/text_size"
@@ -53,7 +51,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginTop="32dp"
-                android:text="@string/activate_info"
+                android:text="@string/verification_code_info"
                 android:fontFamily="@font/montserrat_regular"
                 android:textSize="@dimen/text_size"
                 android:textColor="@color/misty_mauve"
@@ -61,13 +59,13 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textFieldActivationCode"
+                android:id="@+id/textFieldVerificationCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="16dp"
-                android:hint="@string/activate_label"
+                android:hint="@string/verification_code_label"
                 app:boxCornerRadiusBottomEnd="30dp"
                 app:boxCornerRadiusBottomStart="30dp"
                 app:boxCornerRadiusTopEnd="30dp"
@@ -75,7 +73,7 @@
                 app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextActivationCode"
+                    android:id="@+id/editTextVerificationCode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAllCaps="true"
@@ -86,7 +84,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/btnActivate"
+                android:id="@+id/btnVerify"
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/button_height"
                 android:layout_marginStart="16dp"
@@ -94,7 +92,7 @@
                 android:layout_marginEnd="16dp"
                 android:backgroundTint="@color/primary"
                 android:fontFamily="@font/montserrat_regular"
-                android:text="@string/activate"
+                android:text="@string/verify"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size"
@@ -102,7 +100,5 @@
 
         </LinearLayout>
     </ScrollView>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

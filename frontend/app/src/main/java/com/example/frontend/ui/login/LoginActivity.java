@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.frontend.MainActivity;
 import com.example.frontend.R;
 import com.example.frontend.databinding.ActivityLoginBinding;
+import com.example.frontend.ui.recover.RecoverPasswordActivity;
 import com.example.frontend.ui.register.ActivateAccountActivity;
 import com.example.frontend.ui.register.RegisterActivity;
 import com.example.frontend.utils.InputValidator;
@@ -49,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         binding.tvForgotPassword.setOnClickListener(v -> {
-            //TODO
+            startActivity(new Intent(this, RecoverPasswordActivity.class));
         });
 
         binding.tvRegister.setOnClickListener(v -> {

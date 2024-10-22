@@ -15,11 +15,24 @@
         android:theme="@style/Theme.Frontend"
         tools:targetApi="31">
         <activity
+            android:name=".ui.recover.UpdatedPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.recover.NewPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.recover.VerificationCodeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.recover.RecoverPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.register.ActivateAccountActivity"
             android:exported="false" />
         <activity
             android:name=".ui.register.RegisterActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="false" />
