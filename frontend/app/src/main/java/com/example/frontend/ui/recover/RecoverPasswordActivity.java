@@ -43,8 +43,11 @@ public class RecoverPasswordActivity extends AppCompatActivity {
 
     private void observerViewModel(){
         viewModel.getApiResponse().observe(this, response -> {
+            String email = binding.editTextEmail.getText().toString().trim();
             if(response != null && response.getStatus().equals("success")){
-                startActivity(new Intent(this, VerificationCodeActivity.class));
+                Intent intent = new Intent(this, VerificationCodeActivity.class);
+                intent.putExtra("email", email);
+                startActivity(intent);
                 finish();
             }
         });

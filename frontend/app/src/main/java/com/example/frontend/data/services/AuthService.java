@@ -5,6 +5,8 @@ import com.example.frontend.data.models.LoginRequest;
 import com.example.frontend.data.models.ApiResponse;
 import com.example.frontend.data.models.RecoverPasswordRequest;
 import com.example.frontend.data.models.RegisterRequest;
+import com.example.frontend.data.models.ResetPasswordRequest;
+import com.example.frontend.data.models.VerifyCodeRequest;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -22,4 +24,10 @@ public interface AuthService {
 
     @POST("api/auth/recover-password")
     Call<ApiResponse> recoverPassword(@Body RecoverPasswordRequest recoverPasswordRequest);
+
+    @POST("api/auth/verify-recover-code")
+    Call<ApiResponse> verifyCode(@Body VerifyCodeRequest verifyCodeRequest);
+
+    @POST("api/auth/reset-password")
+    Call<ApiResponse> resetPassword(@Body ResetPasswordRequest requestPasswordRequest);
 }
