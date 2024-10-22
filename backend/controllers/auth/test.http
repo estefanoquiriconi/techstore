@@ -41,3 +41,12 @@ Content-Type: application/json
 {
   "recoverpass_code" : "BDD5CF95"
 }
+
+### Probar el endpoint para resetear la contraseña
+POST http://localhost:3000/api/auth/reset-password
+Content-Type: application/json
+
+{
+  "email" : "estefanoquiriconi@gmail.com",
+  "new_password" : "123"
+}
