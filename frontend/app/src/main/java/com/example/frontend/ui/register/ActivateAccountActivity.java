@@ -16,12 +16,14 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.frontend.R;
 import com.example.frontend.databinding.ActivityActivateAccountBinding;
+import com.example.frontend.ui.LoadingDialogFragment;
 import com.example.frontend.ui.login.LoginActivity;
 
 public class ActivateAccountActivity extends AppCompatActivity {
 
     ActivityActivateAccountBinding binding;
     ActivateAccountViewModel activateAccountViewModel;
+    LoadingDialogFragment loadingDialogFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +36,12 @@ public class ActivateAccountActivity extends AppCompatActivity {
         activateAccountViewModel = new ViewModelProvider(this).get(ActivateAccountViewModel.class);
         observerViewModel();
 
+        loadingDialogFragment = new LoadingDialogFragment();
+
         binding.btnActivate.setOnClickListener(v -> {
             if(validateInputs()){
+                loadingDialogFragment.show(getSupportFragmentManager(), "loading");
+
                 String activationCode = binding.editTextActivationCode.getText().toString().trim();
                 activateAccountViewModel.activeAccount(activationCode);
             }
@@ -45,6 +51,7 @@ public class ActivateAccountActivity extends AppCompatActivity {
 
     public void observerViewModel() {
         activateAccountViewModel.getApiResponse().observe(this, response -> {
+            loadingDialogFragment.dismiss();
             if(response != null && response.getStatus().equals("success")){
                 new AlertDialog.Builder(this)
                         .setTitle("OK")
@@ -59,6 +66,7 @@ public class ActivateAccountActivity extends AppCompatActivity {
         });
 
         activateAccountViewModel.getErrorMessage().observe(this, error -> {
+            loadingDialogFragment.dismiss();
             if (error != null) {
                 new AlertDialog.Builder(this)
                         .setTitle("Error")

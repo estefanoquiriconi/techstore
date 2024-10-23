@@ -14,12 +14,14 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.frontend.R;
 import com.example.frontend.databinding.ActivityNewPasswordBinding;
+import com.example.frontend.ui.LoadingDialogFragment;
 
 public class NewPasswordActivity extends AppCompatActivity {
 
     ActivityNewPasswordBinding binding;
     NewPasswordViewModel viewModel;
     private String email;
+    LoadingDialogFragment loadingDialogFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +39,12 @@ public class NewPasswordActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(NewPasswordViewModel.class);
         observerViewModel();
 
+        loadingDialogFragment = new LoadingDialogFragment();
+
         binding.btnResetPassword.setOnClickListener(v -> {
             if (validateInputs()) {
+                loadingDialogFragment.show(getSupportFragmentManager(), "loading");
+
                 String newPassword = binding.editTextPassword.getText().toString().trim();
                 viewModel.resetPassword(email, newPassword);
             }
@@ -51,11 +57,13 @@ public class NewPasswordActivity extends AppCompatActivity {
 
     private void observerViewModel() {
         viewModel.getApiResponse().observe(this, response -> {
+            loadingDialogFragment.dismiss();
             startActivity(new Intent(this, UpdatedPasswordActivity.class));
             finish();
         });
 
         viewModel.getErrorMessage().observe(this, error -> {
+            loadingDialogFragment.dismiss();
             if (error != null) {
                 new AlertDialog.Builder(this)
                         .setTitle("Error")

@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.frontend.MainActivity;
 import com.example.frontend.R;
 import com.example.frontend.databinding.ActivityLoginBinding;
+import com.example.frontend.ui.LoadingDialogFragment;
 import com.example.frontend.ui.recover.RecoverPasswordActivity;
 import com.example.frontend.ui.register.ActivateAccountActivity;
 import com.example.frontend.ui.register.RegisterActivity;
@@ -24,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private ActivityLoginBinding binding;
     private LoginViewModel loginViewModel;
+    private LoadingDialogFragment loadingDialogFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,8 @@ public class LoginActivity extends AppCompatActivity {
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         observerViewModel();
 
+        loadingDialogFragment = new LoadingDialogFragment();
+
         binding.btnLogin.setOnClickListener(v -> {
             if (InputValidator.isEmpty(binding.editTextEmail, "Por favor, ingresa tu email"))
                 return;
@@ -46,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
 
             String email = binding.editTextEmail.getText().toString().trim();
             String password = binding.editTextPassword.getText().toString().trim();
+            loadingDialogFragment.show(getSupportFragmentManager(), "loading");
             loginViewModel.login(email, password);
         });
 
@@ -61,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void observerViewModel() {
         loginViewModel.getApiResponse().observe(this, response -> {
+            loadingDialogFragment.dismiss();
             if (response != null && response.getStatus().equals("success")) {
                 saveToken(response.getToken());
                 startActivity(new Intent(this, MainActivity.class));
@@ -69,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         loginViewModel.getErrorMessage().observe(this, error -> {
+            loadingDialogFragment.dismiss();
             if (error != null) {
                 if (error.equals("Activación pendiente")) {
                     new AlertDialog.Builder(this)

@@ -1,6 +1,7 @@
 package com.example.frontend.ui.recover;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -16,11 +17,14 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.frontend.R;
 import com.example.frontend.databinding.ActivityRecoverPasswordBinding;
+import com.example.frontend.ui.LoadingDialogFragment;
 
 public class RecoverPasswordActivity extends AppCompatActivity {
 
     ActivityRecoverPasswordBinding binding;
     RecoverPasswordViewModel viewModel;
+    private LoadingDialogFragment loadingDialogFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +37,12 @@ public class RecoverPasswordActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(RecoverPasswordViewModel.class);
         observerViewModel();
 
+        loadingDialogFragment = new LoadingDialogFragment();
+
         binding.btnSend.setOnClickListener(v -> {
             if(validateInputs()){
+                loadingDialogFragment.show(getSupportFragmentManager(), "loading");
+
                 String email = binding.editTextEmail.getText().toString().trim();
                 viewModel.recoverPassword(email);
             }
@@ -43,6 +51,7 @@ public class RecoverPasswordActivity extends AppCompatActivity {
 
     private void observerViewModel(){
         viewModel.getApiResponse().observe(this, response -> {
+            loadingDialogFragment.dismiss();
             String email = binding.editTextEmail.getText().toString().trim();
             if(response != null && response.getStatus().equals("success")){
                 Intent intent = new Intent(this, VerificationCodeActivity.class);
@@ -53,6 +62,7 @@ public class RecoverPasswordActivity extends AppCompatActivity {
         });
 
         viewModel.getErrorMessage().observe(this, error -> {
+            loadingDialogFragment.dismiss();
             if (error != null) {
                 new AlertDialog.Builder(this)
                         .setTitle("Error")

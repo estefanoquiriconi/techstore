@@ -15,12 +15,14 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.frontend.R;
 import com.example.frontend.databinding.ActivityRegisterBinding;
+import com.example.frontend.ui.LoadingDialogFragment;
 import com.example.frontend.ui.login.LoginActivity;
 
 public class RegisterActivity extends AppCompatActivity {
 
     ActivityRegisterBinding binding;
     RegisterViewModel registerViewModel;
+    LoadingDialogFragment loadingDialogFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,8 @@ public class RegisterActivity extends AppCompatActivity {
         registerViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
         observerViewModel();
 
+        loadingDialogFragment = new LoadingDialogFragment();
+
         binding.tvSignIn.setOnClickListener(v -> {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
@@ -40,6 +44,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         binding.btnRegister.setOnClickListener(v -> {
             if(validateInputs()){
+                loadingDialogFragment.show(getSupportFragmentManager(), "loading");
+
                 String lastName = binding.editTextLastName.getText().toString().trim();
                 String firstName = binding.editTextFirstName.getText().toString().trim();
                 String email = binding.editTextEmail.getText().toString().trim();
@@ -52,6 +58,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void observerViewModel() {
         registerViewModel.getApiResponse().observe(this, response -> {
+            loadingDialogFragment.dismiss();
             if (response != null && response.getStatus().equals("success")) {
                 startActivity(new Intent(this, ActivateAccountActivity.class));
                 finish();
@@ -59,6 +66,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         registerViewModel.getErrorMessage().observe(this, error -> {
+            loadingDialogFragment.dismiss();
             if (error != null) {
                 new AlertDialog.Builder(this)
                         .setTitle("Error")

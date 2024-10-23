@@ -14,12 +14,14 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.frontend.R;
 import com.example.frontend.databinding.ActivityVerificationCodeBinding;
+import com.example.frontend.ui.LoadingDialogFragment;
 
 public class VerificationCodeActivity extends AppCompatActivity {
 
     ActivityVerificationCodeBinding binding;
     VerificationCodeViewModel viewModel;
     private String email;
+    private LoadingDialogFragment loadingDialogFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,17 +39,26 @@ public class VerificationCodeActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(VerificationCodeViewModel.class);
         observerViewModel();
 
+        loadingDialogFragment = new LoadingDialogFragment();
+
         binding.btnVerify.setOnClickListener(v -> {
             if(validateInputs()){
+                loadingDialogFragment.show(getSupportFragmentManager(), "loading");
+
                 String code = binding.editTextVerificationCode.getText().toString().trim();
                 viewModel.verifyCode(code);
             }
+        });
+
+        binding.ivBack.setOnClickListener(v -> {
+            finish();
         });
 
     }
 
     public void observerViewModel() {
         viewModel.getApiResponse().observe(this, response -> {
+            loadingDialogFragment.dismiss();
             if (response != null && response.getStatus().equals("success")) {
                 Intent intent = new Intent(this, NewPasswordActivity.class);
                 intent.putExtra("email", this.email);
@@ -57,6 +68,7 @@ public class VerificationCodeActivity extends AppCompatActivity {
         });
 
         viewModel.getErrorMessage().observe(this, error -> {
+            loadingDialogFragment.dismiss();
             if (error != null) {
                 new AlertDialog.Builder(this)
                         .setTitle("Error")
