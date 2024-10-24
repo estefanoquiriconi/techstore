@@ -10,10 +10,10 @@ const resetPassword = async (req, res, next) => {
         const user = await User.findOne({where : { email }});
         if(!user) notFoundError('Usuario no encontrado', 'USER_NOT_FOUND');
 
-        const hashedPassword = bcryptjs.hashSync(new_password, 10);
+        const hashedPassword = await bcryptjs.hash(new_password, 10);
 
         user.password = hashedPassword;
-        user.save();
+        await user.save();
 
         res.status(200).json({
             status: "success",

@@ -17,7 +17,7 @@ const register = async (req, res, next) => {
 
         const registration_code = uuidv4().split('-')[0].toUpperCase();
 
-        const hashedPassword = bcryptjs.hashSync(password, 10);
+        const hashedPassword = await bcryptjs.hash(password, 10);
 
         await authService.register(first_name, last_name, email, hashedPassword, registration_code);
 
