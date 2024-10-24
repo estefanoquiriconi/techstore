@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Patterns;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,14 +14,13 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.frontend.MainActivity;
+import com.example.frontend.ui.MainActivity;
 import com.example.frontend.R;
 import com.example.frontend.databinding.ActivityLoginBinding;
 import com.example.frontend.ui.LoadingDialogFragment;
 import com.example.frontend.ui.recover.RecoverPasswordActivity;
 import com.example.frontend.ui.register.ActivateAccountActivity;
 import com.example.frontend.ui.register.RegisterActivity;
-import com.example.frontend.utils.InputValidator;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -41,17 +42,14 @@ public class LoginActivity extends AppCompatActivity {
         loadingDialogFragment = new LoadingDialogFragment();
 
         binding.btnLogin.setOnClickListener(v -> {
-            if (InputValidator.isEmpty(binding.editTextEmail, "Por favor, ingresa tu email"))
-                return;
-            if (InputValidator.isInvalidEmail(binding.editTextEmail, "Verifica tu email, algo no está bien \uD83D\uDE05"))
-                return;
-            if (InputValidator.isEmpty(binding.editTextPassword, "¡Ups! Falta la contraseña \uD83D\uDD12"))
-                return;
+            if(validateInputs()){
+                loadingDialogFragment.show(getSupportFragmentManager(), "loading");
 
-            String email = binding.editTextEmail.getText().toString().trim();
-            String password = binding.editTextPassword.getText().toString().trim();
-            loadingDialogFragment.show(getSupportFragmentManager(), "loading");
-            loginViewModel.login(email, password);
+                String email = binding.editTextEmail.getText().toString().trim();
+                String password = binding.editTextPassword.getText().toString().trim();
+                loginViewModel.login(email, password);
+            }
+
         });
 
         binding.tvForgotPassword.setOnClickListener(v -> {
@@ -104,6 +102,38 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("auth_token", token);
         editor.apply();
+    }
+
+    private boolean validateInputs() {
+
+        String email = binding.editTextEmail.getText().toString().trim();
+        String password = binding.editTextPassword.getText().toString();
+
+
+        if (TextUtils.isEmpty(email)) {
+            binding.editTextEmail.setError("El correo no puede estar vacío");
+            binding.editTextEmail.requestFocus();
+            return false;
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            binding.editTextEmail.setError("Ingresa un correo válido");
+            binding.editTextEmail.requestFocus();
+            return false;
+        }
+
+        if (TextUtils.isEmpty(password)) {
+            binding.editTextPassword.setError("La contraseña no puede estar vacía");
+            binding.editTextPassword.requestFocus();
+            return false;
+        }
+
+        if (password.length() < 5) {
+            binding.editTextPassword.setError("La contraseña debe tener al menos 5 caracteres");
+            binding.editTextPassword.requestFocus();
+            return false;
+        }
+
+        return true;
     }
 
     public void setWindowInsets() {

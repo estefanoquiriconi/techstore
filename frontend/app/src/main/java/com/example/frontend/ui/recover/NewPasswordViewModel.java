@@ -3,8 +3,8 @@ package com.example.frontend.ui.recover;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.frontend.data.models.ApiResponse;
-import com.example.frontend.data.models.ResetPasswordRequest;
+import com.example.frontend.data.models.auth.ApiResponse;
+import com.example.frontend.data.models.auth.ResetPasswordRequest;
 import com.example.frontend.data.services.AuthService;
 import com.example.frontend.utils.RetrofitClient;
 

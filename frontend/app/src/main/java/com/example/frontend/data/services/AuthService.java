@@ -1,12 +1,13 @@
 package com.example.frontend.data.services;
 
-import com.example.frontend.data.models.ActivateAccountRequest;
-import com.example.frontend.data.models.LoginRequest;
-import com.example.frontend.data.models.ApiResponse;
-import com.example.frontend.data.models.RecoverPasswordRequest;
-import com.example.frontend.data.models.RegisterRequest;
-import com.example.frontend.data.models.ResetPasswordRequest;
-import com.example.frontend.data.models.VerifyCodeRequest;
+import com.example.frontend.data.models.auth.ActivateAccountRequest;
+import com.example.frontend.data.models.auth.LoginRequest;
+import com.example.frontend.data.models.auth.ApiResponse;
+import com.example.frontend.data.models.auth.LoginResponse;
+import com.example.frontend.data.models.auth.RecoverPasswordRequest;
+import com.example.frontend.data.models.auth.RegisterRequest;
+import com.example.frontend.data.models.auth.ResetPasswordRequest;
+import com.example.frontend.data.models.auth.VerifyCodeRequest;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -14,7 +15,7 @@ import retrofit2.http.POST;
 
 public interface AuthService {
     @POST("/api/auth/login")
-    Call<ApiResponse> login(@Body LoginRequest loginRequest);
+    Call<LoginResponse> login(@Body LoginRequest loginRequest);
 
     @POST("api/auth/register")
     Call<ApiResponse> register(@Body RegisterRequest registerRequest);

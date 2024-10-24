@@ -1,4 +1,4 @@
-package com.example.frontend.data.models;
+package com.example.frontend.data.models.auth;
 
 public class RegisterRequest {
 

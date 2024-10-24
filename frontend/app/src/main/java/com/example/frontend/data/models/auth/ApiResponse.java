@@ -1,10 +1,9 @@
-package com.example.frontend.data.models;
+package com.example.frontend.data.models.auth;
 
 public class ApiResponse {
 
     private String status;
     private String message;
-    private String token;
 
     public String getStatus() {
         return status;
@@ -14,7 +13,4 @@ public class ApiResponse {
         return message;
     }
 
-    public String getToken() {
-        return token;
-    }
 }

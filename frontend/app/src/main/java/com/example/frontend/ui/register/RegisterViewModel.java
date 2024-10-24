@@ -4,8 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.frontend.data.models.ApiResponse;
-import com.example.frontend.data.models.RegisterRequest;
+import com.example.frontend.data.models.auth.ApiResponse;
+import com.example.frontend.data.models.auth.RegisterRequest;
 import com.example.frontend.data.services.AuthService;
 import com.example.frontend.utils.RetrofitClient;
 
