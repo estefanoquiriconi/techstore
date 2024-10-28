@@ -14,7 +14,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.frontend.ui.MainActivity;
+import com.example.frontend.HomeActivity;
 import com.example.frontend.R;
 import com.example.frontend.databinding.ActivityLoginBinding;
 import com.example.frontend.ui.LoadingDialogFragment;
@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
             loadingDialogFragment.dismiss();
             if (response != null && response.getStatus().equals("success")) {
                 saveToken(response.getToken());
-                startActivity(new Intent(this, MainActivity.class));
+                startActivity(new Intent(this, HomeActivity.class));
                 finish();
             }
         });

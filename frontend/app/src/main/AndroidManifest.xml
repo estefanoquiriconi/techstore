@@ -15,6 +15,10 @@
         android:theme="@style/Theme.Frontend"
         tools:targetApi="31">
         <activity
+            android:name=".HomeActivity"
+            android:exported="false"
+            android:label="@string/title_activity_home" />
+        <activity
             android:name=".ui.recover.UpdatedPasswordActivity"
             android:exported="false" />
         <activity
@@ -35,9 +39,6 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.login.LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.MainActivity"
             android:exported="false" />
         <activity
             android:name=".ui.SplashActivity"
