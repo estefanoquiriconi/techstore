@@ -2,7 +2,9 @@ const Product = require('../models/product');
 
 exports.index = async (req, res) => {
   try {
-    const products = await Product.findAll();
+    const products = await Product.findAll({
+      attributes: {exclude: ['created_at', 'updated_at']}
+    });
     res.json(products);
   } catch (error) {
     res.status(500).json({ message: error.message });
