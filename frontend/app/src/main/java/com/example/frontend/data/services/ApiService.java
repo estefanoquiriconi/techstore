@@ -2,6 +2,7 @@ package com.example.frontend.data.services;
 
 import com.example.frontend.data.models.Banner;
 import com.example.frontend.data.models.Category;
+import com.example.frontend.data.models.Product;
 
 import java.util.List;
 
@@ -15,5 +16,8 @@ public interface ApiService {
 
     @GET("api/banners")
     Call<List<Banner>> getBanners();
+
+    @GET("api/products")
+    Call<List<Product>> getProducts();
 
 }

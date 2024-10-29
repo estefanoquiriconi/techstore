@@ -18,6 +18,7 @@ public class HomeFragment extends Fragment {
     private HomeViewModel viewModel;
     private CategoryAdapter categoryAdapter;
     private BannerAdapter bannerAdapter;
+    private ProductAdapter productAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(this).get(HomeViewModel.class);
@@ -33,6 +34,13 @@ public class HomeFragment extends Fragment {
     private void setupUI() {
         setupCategoryRecyclerView();
         setupBannerViewPager();
+        setupProductRecyclerView();
+    }
+
+    private void setupProductRecyclerView() {
+        binding.recyclerViewProduct.setLayoutManager(new LinearLayoutManager(getContext()));
+        productAdapter = new ProductAdapter(this.getContext());
+        binding.recyclerViewProduct.setAdapter(productAdapter);
     }
 
     private void setupCategoryRecyclerView() {
@@ -54,11 +62,16 @@ public class HomeFragment extends Fragment {
         viewModel.getBanners().observe(getViewLifecycleOwner(), banners -> bannerAdapter.setBanners(banners));
 
         viewModel.getIsLoadingBanners().observe(getViewLifecycleOwner(), isLoading -> binding.progressBarBanner.setVisibility(isLoading ? View.VISIBLE : View.GONE));
+
+        viewModel.getProducts().observe(getViewLifecycleOwner(), products -> productAdapter.setProducts(products));
+
+        viewModel.getIsLoadingProducts().observe(getViewLifecycleOwner(), isLoading -> binding.progressBarProduct.setVisibility(isLoading ? View.VISIBLE : View.GONE));
     }
 
     private void loadData() {
         viewModel.loadCategories();
         viewModel.loadBanners();
+        viewModel.loadProducts();
     }
 
     @Override
