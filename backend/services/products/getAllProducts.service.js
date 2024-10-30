@@ -1,4 +1,4 @@
-const { Product, Category, Brand } = require('../../models/associations.js')
+const { Product, Category, Brand } = require('../../models/index.js')
 
 const getAll = async ({ category, sortBy = 'created_at', order = 'desc' }) => {
   const products = await Product.findAll({

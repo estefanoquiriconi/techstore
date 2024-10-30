@@ -1,5 +1,5 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+const { DataTypes } = require('sequelize')
+const sequelize = require('../database/config/sequelize.js')
 
 const Product = sequelize.define('Product', {
   id: {
@@ -34,6 +34,6 @@ const Product = sequelize.define('Product', {
   createdAt: 'created_at',
   updatedAt: 'updated_at',
   tableName: 'products'
-});
+})
 
-module.exports = Product;
+module.exports = Product

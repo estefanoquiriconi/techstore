@@ -1,9 +1,9 @@
-const { sendMail } = require('../../helpers/email.helper');
+const { sendMail } = require('../../helpers/email.helper')
 
 const registerSendEmail = async (firstName, email, registrationCode) => {
-    const subject = 'Bienvenido a TechStore - Activa tu cuenta';
+  const subject = 'Bienvenido a TechStore - Activa tu cuenta'
 
-    const body = `
+  const body = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #f0f0f0; border-radius: 10px; background-color: #ffffff;">
         <div style="text-align: center; padding: 10px;">
             <h1>TechStore 😎</h1>
@@ -22,9 +22,9 @@ const registerSendEmail = async (firstName, email, registrationCode) => {
         <p style="font-size: 12px; color: #999; text-align: center;">
             © ${new Date().getFullYear()} TechStore. Todos los derechos reservados.
         </p>
-    </div>`;
+    </div>`
 
-    await sendMail(email, subject, body);
-};
+  await sendMail(email, subject, body)
+}
 
-module.exports = { registerSendEmail };
+module.exports = { registerSendEmail }

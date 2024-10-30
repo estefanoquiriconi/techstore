@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize')
 const sequelize = require('../database/config/sequelize.js')
 
-const Brand = sequelize.define('Brand', {
+const Banner = sequelize.define('Banner', {
   id: {
     type: DataTypes.BIGINT,
     primaryKey: true,
@@ -10,10 +10,17 @@ const Brand = sequelize.define('Brand', {
   name: {
     type: DataTypes.STRING,
     unique: true
+  },
+  image_url: {
+    type: DataTypes.STRING
+  },
+  active: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: true
   }
 }, {
   timestamps: false,
-  tableName: 'brands'
+  tableName: 'banners'
 })
 
-module.exports = Brand
+module.exports = Banner

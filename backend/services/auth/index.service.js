@@ -3,7 +3,7 @@ const { registerSendEmail } = require('./registerSendEmail.service.js')
 const { activate } = require('./activate.service.js')
 
 module.exports = {
-    register,
-    registerSendEmail,
-    activate,
+  register,
+  registerSendEmail,
+  activate
 }

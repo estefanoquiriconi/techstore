@@ -1,5 +1,5 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+const { DataTypes } = require('sequelize')
+const sequelize = require('../database/config/sequelize.js')
 
 const Review = sequelize.define('Review', {
   id: {
@@ -21,7 +21,7 @@ const Review = sequelize.define('Review', {
   timestamps: true,
   createdAt: 'created_at',
   updatedAt: 'updated_at',
-  tableName : 'reviews'
-});
+  tableName: 'reviews'
+})
 
-module.exports = Review;
+module.exports = Review

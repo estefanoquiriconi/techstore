@@ -1,60 +1,21 @@
-const Order = require('../models/order');
+const { Order } = require('../models/index.js')
+const { notFoundError } = require('../helpers/error.helper.js')
 
-exports.index = async (req, res) => {
+exports.index = async (req, res, next) => {
   try {
-    const orders = await Order.findAll();
-    res.json(orders);
+    const orders = await Order.findAll()
+    res.json(orders)
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    next(error)
   }
-};
+}
 
-exports.store = async (req, res) => {
+exports.show = async (req, res, next) => {
   try {
-    const order = await Order.create(req.body);
-    res.status(201).json(order);
+    const order = await Order.findByPk(req.params.id)
+    if (!order) notFoundError('Orden no encontrada', 'ORDER_NOT_FOUND')
+    res.json(order)
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    next(error)
   }
-};
-
-exports.show = async (req, res) => {
-  try {
-    const order = await Order.findByPk(req.params.id);
-    if (order) {
-      res.json(order);
-    } else {
-      res.status(404).json({ message: 'Order not found' });
-    }
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
-exports.update = async (req, res) => {
-  try {
-    const order = await Order.findByPk(req.params.id);
-    if (order) {
-      await order.Order(req.body);
-      res.json(order);
-    } else {
-      res.status(404).json({ message: 'Order not found' });
-    }
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-};
-
-exports.destroy = async (req, res) => {
-  try {
-    const order = await Order.findByPk(req.params.id);
-    if (order) {
-      await Order.destroy();
-      res.json({ message: 'Order deleted' });
-    } else {
-      res.status(404).json({ message: 'Order not found' });
-    }
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+}

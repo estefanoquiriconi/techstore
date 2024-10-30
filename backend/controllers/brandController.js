@@ -1,60 +1,21 @@
-const Brand = require('../models/brand');
+const { Brand } = require('../models/index.js')
+const { notFoundError } = require('../helpers/error.helper.js')
 
-exports.index = async (req, res) => {
+exports.index = async (req, res, next) => {
   try {
-    const brands = await Brand.findAll();
-    res.json(brands);
+    const brands = await Brand.findAll()
+    res.json(brands)
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    next(error)
   }
-};
+}
 
-exports.store = async (req, res) => {
+exports.show = async (req, res, next) => {
   try {
-    const brand = await Brand.create(req.body);
-    res.status(201).json(brand);
+    const brand = await Brand.findByPk(req.params.id)
+    if (!brand) notFoundError('Marca no encontrada', 'BRAND_NOT_FOUND')
+    res.json(brand)
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    next(error)
   }
-};
-
-exports.show = async (req, res) => {
-  try {
-    const brand = await Brand.findByPk(req.params.id);
-    if (brand) {
-      res.json(brand);
-    } else {
-      res.status(404).json({ message: 'Brand not found' });
-    }
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
-exports.update = async (req, res) => {
-  try {
-    const brand = await Brand.findByPk(req.params.id);
-    if (brand) {
-      await brand.update(req.body);
-      res.json(brand);
-    } else {
-      res.status(404).json({ message: 'Brand not found' });
-    }
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-};
-
-exports.destroy = async (req, res) => {
-  try {
-    const brand = await Brand.findByPk(req.params.id);
-    if (brand) {
-      await brand.destroy();
-      res.json({ message: 'Brand deleted' });
-    } else {
-      res.status(404).json({ message: 'Brand not found' });
-    }
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+}

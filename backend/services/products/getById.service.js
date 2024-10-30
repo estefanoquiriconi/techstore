@@ -1,4 +1,4 @@
-const { Product, Category, Brand } = require('../../models/associations.js')
+const { Product, Category, Brand } = require('../../models/index.js')
 const getById = async (id) => {
   const product = await Product.findByPk(id, {
     include: [
@@ -20,7 +20,7 @@ const getById = async (id) => {
       'stock',
       'created_at',
       'updated_at'
-    ],
+    ]
   })
   return product
 }
