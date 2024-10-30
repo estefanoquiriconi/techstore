@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path')
+const swaggerSetup = require('./docs/swagger.js')
 const userRoutes = require('./routes/users.routes');
 const categoryRoutes = require('./routes/categories.routes');
 const brandRoutes = require('./routes/brands.routes');
@@ -33,6 +34,7 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;
 
+swaggerSetup(app);
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });

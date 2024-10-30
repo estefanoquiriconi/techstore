@@ -1,62 +1,26 @@
-const Product = require('../models/product');
+const productService = require('../services/products/index.service.js')
+const { notFoundError, badRequestError } = require('../helpers/error.helper.js')
 
-exports.index = async (req, res) => {
+exports.getAllProducts = async (req, res, next) => {
+  const validSortFields = ['price', 'name', 'created_at', 'stock']
+  const validOrderValues = ['asc', 'desc']
+  const { category, sortBy = 'created_at', order = 'desc' } = req.query
   try {
-    const products = await Product.findAll({
-      attributes: {exclude: ['created_at', 'updated_at']}
-    });
-    res.json(products);
+    if (!validSortFields.includes(sortBy) || !validOrderValues.includes(order)) badRequestError('Parámetros inválidos')
+    const products = await productService.getAll({ category, sortBy, order })
+    res.json(products)
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    next(error)
   }
-};
+}
 
-exports.store = async (req, res) => {
+exports.getProductById = async (req, res, next) => {
+  const { id } = req.params
   try {
-    const product = await Product.create(req.body);
-    res.status(201).json(product);
+    const product = await productService.getById(id)
+    if (!product) notFoundError('Producto no encontrado', 'PRODUCT_NOT_FOUND')
+    res.json(product)
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    next(error)
   }
-};
-
-exports.show = async (req, res) => {
-  try {
-    const product = await Product.findByPk(req.params.id);
-    if (product) {
-      res.json(product);
-    } else {
-      res.status(404).json({ message: 'Product not found' });
-    }
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
-exports.update = async (req, res) => {
-  try {
-    const product = await Product.findByPk(req.params.id);
-    if (product) {
-      await Product.product(req.body);
-      res.json(product);
-    } else {
-      res.status(404).json({ message: 'Product not found' });
-    }
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-};
-
-exports.destroy = async (req, res) => {
-  try {
-    const product = await Product.findByPk(req.params.id);
-    if (product) {
-      await Product.destroy();
-      res.json({ message: 'Product deleted' });
-    } else {
-      res.status(404).json({ message: 'Product not found' });
-    }
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+}
