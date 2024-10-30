@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="primary">#40404C</color>
+    <color name="secondary">#272632</color>
+    <color name="abyssal_black">#1A1A24</color>
+    <color name="misty_mauve">#7B7990</color>
+</resources>
