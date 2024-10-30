@@ -123,4 +123,4 @@ Contiene las reseñas de los productos realizadas por los usuarios.
 - La tabla `orders` utiliza un ENUM para el estado del pedido, limitando los valores posibles.
 - La tabla `order_details` incluye un campo calculado `subtotal` basado en la cantidad y el precio.
 - La tabla `reviews` tiene una restricción UNIQUE para evitar múltiples reseñas del mismo usuario para el mismo producto.
-- `user_addresses` permite a los usuarios almacenar múltiples direcciones, con soporte para geolocalización mediante latitud y longitud.  
+- La tabla `user_addresses` permite a los usuarios almacenar múltiples direcciones, con soporte para geolocalización mediante latitud y longitud.  

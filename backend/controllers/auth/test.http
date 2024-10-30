@@ -1,0 +1,52 @@
+### Probar el endpoint login
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "estefanoquiriconi@gmail.com",
+  "password": "12345"
+}
+
+### Probar el endpoint register
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "estefanoquiriconi@gmail.com",
+  "password": "12345",
+  "first_name" : "Estéfano",
+  "last_name": "Quiriconi"
+}
+
+### Probar el endpoint para activar una cuenta
+POST http://localhost:3000/api/auth/activate
+Content-Type: application/json
+
+{
+  "registration_code" : "C6423A54"
+}
+
+### Probar el endpoint para pedir el código de recuperación
+POST http://localhost:3000/api/auth/recover-password
+Content-Type: application/json
+
+{
+  "email" : "estefanoquiriconi@gmail.com"
+}
+
+### Probar el endpoint para verificar el código de recuperación
+POST http://localhost:3000/api/auth/verify-recover-code
+Content-Type: application/json
+
+{
+  "recoverpass_code" : "BDD5CF95"
+}
+
+### Probar el endpoint para resetear la contraseña
+POST http://localhost:3000/api/auth/reset-password
+Content-Type: application/json
+
+{
+  "email" : "estefanoquiriconi@gmail.com",
+  "new_password" : "123"
+}
