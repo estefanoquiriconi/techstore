@@ -31,7 +31,7 @@ VALUES
 
 INSERT INTO brands (name)
 VALUES
-('Apple'),
+('Motorola'),
 ('Samsung'),
 ('Dell'),
 ('Sony'),
@@ -39,11 +39,12 @@ VALUES
 
 INSERT INTO products (name, brand_id, category_id, price, description, image_url, stock, active)
 VALUES
-('iPhone 13', 1, 1, 299999.99, 'Último modelo de iPhone', 'https://example.com/iphone13.jpg', 50, 1),
-('Galaxy S21', 2, 1, 259999.99, 'Teléfono Android de gama alta', 'https://example.com/galaxys21.jpg', 40, 1),
-('MacBook Pro', 1, 3, 499999.99, 'Notebook potente para profesionales', 'https://example.com/macbookpro.jpg', 30, 1),
-('iPad Air', 1, 2, 199999.99, 'Tablet liviana y versátil', 'https://example.com/ipadair.jpg', 35, 1),
-('Sony WH-1000XM4', 4, 4, 89999.99, 'Auriculares con cancelación de ruido', 'https://example.com/sonywh1000xm4.jpg', 25, 1);
+('Motorola Edge 50 Fusion', 1, 1, 799999, 'Diferentes colores y materiales con protección dentro y fuera del agua (IP68)', 'https://armoto.vtexassets.com/arquivos/ids/166359-1200-auto?v=638537819436230000&width=1200&height=auto&aspect=true', 50, 1),
+('Moto G54', 1, 1, 549999, 'Diseño elegante y cómodo. La cubierta de la cámara de aluminio y el acabado en cuero vegano color azul índigo, hace que el moto g54 se destaque.', 'https://armoto.vtexassets.com/arquivos/ids/165278-1200-auto?v=638350936558330000&width=1200&height=auto&aspect=true', 25, 1),
+('Galaxy Tab S9 Ultra', 2, 2, 959999, 'ook cover Keyboard (Wi-Fi) Graphite 256GB', 'https://images.samsung.com/is/image/samsung/p6pim/ar/ef-zx912pwegww/gallery/ar-galaxy-tab-s9-ultra-notepaper-screen-white-ef-zx912pwegww-ef-zx912pwegww-front-white-537976200?$650_519_PNG$', 40, 1),
+('MacBook Pro', 1, 3, 1499999.99, 'La MacBook Pro da un salto al futuro con los chips M3, M3 Pro y M3 Max. Fabricados con tecnología de 3 nanómetros y una nueva arquitectura de GPU.', 'https://cdsassets.apple.com/live/SZLF0YNV/images/sp/111901_mbp16-gray.png', 30, 1),
+('iPad Air', 1, 2, 1199999.99, 'El rediseñado iPad Air. Chip M2. Cámara frontal en horizontal. Hermosos colores.', 'https://www.apple.com/v/ipad-air/x/images/overview/hero/hero_endframe__fvm22b45e5me_large.png', 35, 1),
+('Sony WH-1000XM4', 4, 4, 89999.99, 'Auriculares con cancelación de ruido', 'https://www.sony.com.ar/image/f3f1e4cde7ef052790bfd64ce85f39bb?fmt=png-alpha&wid=1200', 25, 1);
 
 INSERT INTO orders (user_id, total_amount, status, created_at, updated_at)
 VALUES

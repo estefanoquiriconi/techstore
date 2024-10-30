@@ -28,7 +28,13 @@
 5. **Valoraciones y reseñas**:
    - El sistema debe permitir a los usuarios dejar **valoraciones** y **comentarios** sobre los productos comprados.
    - El sistema debe mostrar las valoraciones de otros usuarios para cada producto.
-
+   
+6. **Almacenamiento de direcciones y uso de Google Maps**:  
+   - El sistema debe integrar **Google Maps**.  
+   - El sistema debe permitir al usuario **almacenar múltiples direcciones** (ejemplo: "Casa", "Trabajo", "Otra dirección").  
+   - El sistema debe permitir que el usuario **seleccione una dirección guardada** para usarla como dirección de entrega.   
+   - El usuario debe poder **editar, agregar o eliminar direcciones** desde su perfil.
+   - 
 ---
 
 ## 2. Requerimientos No Funcionales
@@ -53,7 +59,7 @@
 ## 3. Historias de Usuario
 
 1. **Historia de Registro**:  
-   - Como usuario nuevo, quiero registrarme utilizando mi correo electrónico para acceder a todas las funcionalidades de la tienda.
+   - **Como** usuario nuevo, **quiero** registrarme utilizando mi correo electrónico **para** acceder a todas las funcionalidades de la tienda.
 
 2. **Historia de Exploración**:  
    - Como usuario, quiero buscar productos por categorías, marcas y ordenar resultados por precio, para encontrar rápidamente lo que necesito.
@@ -66,6 +72,9 @@
 
 5. **Historia de Valoración**:  
    - Como usuario, quiero calificar los productos que compré para ayudar a otros usuarios con sus decisiones.
+     
+6. **Historia de Almacenamiento de Direcciones**  
+   - Como usuario de la aplicación, quiero guardar varias direcciones y seleccionar una en el checkout, para facilitar el proceso de compra y no tener que ingresar la dirección cada vez.  
 
 ---
 
@@ -81,7 +90,6 @@
 4. El sistema envía un correo para activar la cuenta.
 5. El usuario activa su cuenta mediante el enlace enviado.
 
----
 
 **Caso de Uso 2: Búsqueda y Filtro de Productos**  
 **Actor:** Usuario  
@@ -93,7 +101,6 @@
 4. Aplica filtros de marcas, ordenar por menor o mayor precio.
 5. Visualiza los resultados filtrados.
 
----
 
 **Caso de Uso 3: Proceso de Pago**  
 **Actor:** Usuario  
@@ -104,6 +111,21 @@
 3. Selecciona un método de pago.
 4. Confirma la compra.
 5. El sistema muestra un resumen del pedido.
+
+
+**Caso de Uso 4: Almacenamiento de Direcciones y Uso de Google Maps**  
+**Actor:** Usuario  
+**Descripción:** El usuario gestiona y selecciona direcciones guardadas para usarlas durante el checkout utilizando la integración con Google Maps.  
+**Flujo Principal:**  
+1. El usuario accede al **perfil** y selecciona la opción **"Mis Direcciones"**.  
+2. El usuario hace clic en **"Agregar Nueva Dirección"**.  
+3. La aplicación sugiere la dirección basada en la **ubicación actual del dispositivo** mediante Google Maps.  
+4. El usuario puede **aceptar la sugerencia** o **buscar manualmente una dirección** en el mapa.  
+5. El usuario guarda la dirección asignando un **nombre** (por ejemplo, "Casa" o "Trabajo").  
+6. Durante el proceso de checkout, el sistema muestra las **direcciones guardadas**.  
+7. El usuario selecciona una dirección para la **entrega del pedido**.  
+8. La dirección elegida se muestra en el **resumen del pedido**.  
+9. Si el usuario necesita realizar cambios, puede **editar o eliminar** una dirección desde el perfil.
 
 ---
 
@@ -117,7 +139,7 @@
 
 2. **Frontend (Android):**
    - **Java**: Lenguaje principal para desarrollar la aplicación.
-   - **Volley o Retrofit**: Librerías para realizar peticiones HTTP hacia el backend.
+   - **Retrofit**: Librerías para realizar peticiones HTTP hacia el backend.
    - **SQLite**: Base de datos local para almacenar datos temporales.
 
    **Actividades Principales:**

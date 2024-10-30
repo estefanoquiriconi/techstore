@@ -38,21 +38,21 @@ TechStore es una aplicación móvil diseñada para ofrecer una experiencia efici
 - **Exploración de productos:**  
   Búsqueda por categorías y filtros (precio, marca).  
 - **Carrito de compras:**  
-  Agregar, modificar o eliminar productos y aplicar cupones.  
+  Agregar, modificar o eliminar productos.
 - **Gestión de pedidos:**  
   Visualización del estado y acceso al historial de pedidos.  
 - **Reseñas:**  
   Los usuarios pueden valorar productos y ver reseñas de otros clientes.  
 - **Geolocalización:**  
-  Sugiere automáticamente la dirección del usuario en el checkout mediante GPS.
+  El sistema sugiere automáticamente la dirección del usuario mediante GPS, y permite guardar múltiples direcciones para futuras compras.
 
 ---
 
 ## **Uso**
 1. **Registro e Inicio de Sesión:** Crea una cuenta o ingresa usando tus credenciales.  
 2. **Explora Productos:** Navega por categorías o busca productos específicos.  
-3. **Agrega al Carrito:** Selecciona productos y agrégalos al carrito.  
-4. **Checkout:** Ingresa tu dirección manualmente o usa la sugerencia automática basada en tu ubicación.  
+3. **Agrega al Carrito:** Selecciona productos y agrega al carrito.  
+4. **Checkout:** Ingresa tu dirección manualmente o selecciona una dirección guardada. 
 5. **Realiza el Pago:** Selecciona tu método de pago y confirma el pedido.  
 6. **Historial de Pedidos:** Visualiza el estado actual y revisa pedidos anteriores.
 
@@ -61,7 +61,9 @@ TechStore es una aplicación móvil diseñada para ofrecer una experiencia efici
 ## **Funcionalidad de Geolocalización**
 
 1. **Descripción:**  
-   En el proceso de checkout, se sugiere automáticamente la dirección del usuario basándose en la ubicación obtenida por GPS.
+   * En el proceso de checkout, se sugiere      automáticamente la dirección del usuario basándose en la ubicación obtenida por GPS.
+   * El usuario puede guardar varias direcciones para seleccionarlas rápidamente en futuras compras.
+   
 
 ---
 
@@ -74,7 +76,7 @@ TechStore es una aplicación móvil diseñada para ofrecer una experiencia efici
   Provee servicios para la autenticación, productos, gestión de pedidos, etc.
 
 - **Base de Datos (MySQL):**  
-  Almacena usuarios, productos, marcas, categorias, pedidos y reseñas.
+  Almacena usuarios, productos, marcas, categorias, pedidos, reseñas y direcciones.
 
 ---
 
@@ -88,8 +90,8 @@ TechStore es una aplicación móvil diseñada para ofrecer una experiencia efici
 
 - **Frontend:**  
   - Android con Java  
-  - Volley o Retrofit para peticiones HTTP  
-  - Geocoder o Google Maps API para geolocalización
+  - Retrofit para peticiones HTTP  
+  - Google Maps API para geolocalización
 ---
 
 Desarrollado por **Estéfano Quiriconi**.
