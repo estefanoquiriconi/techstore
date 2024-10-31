@@ -65,5 +65,3 @@ Para realizar pruebas del backend desde una URL pública utilizando HTTPS, puede
    ```
 
 4. Ngrok generará una URL pública HTTPS (por ejemplo, `https://abcdef.ngrok.io`). Puedes utilizar esta URL para probar la API desde ubicaciones externas.
-
-5. Está url será importante para poder consumir la API desde un frontend.
