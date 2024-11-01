@@ -13,7 +13,7 @@ exports.index = async (req, res, next) => {
 exports.show = async (req, res, next) => {
   try {
     const banner = await Banner.findByPk(req.params.id)
-    if (!banner) notFoundError('Marca no encontrada', 'banner_NOT_FOUND')
+    if (!banner) notFoundError('Banner no encontrado', 'BANNER_NOT_FOUND')
     res.json(banner)
   } catch (error) {
     next(error)
