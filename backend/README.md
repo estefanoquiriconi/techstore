@@ -17,7 +17,7 @@ Este es el backend para la aplicación **TechStore**. Está desarrollado con Nod
 1. Clona el repositorio:
    ```bash
    git clone https://github.com/estefanoquiriconi/techstore.git
-   cd backend
+   cd ./techstore/backend
    ```
 
 2. Instala las dependencias:
