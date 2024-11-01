@@ -66,4 +66,28 @@ router.get('/', controller.getAllProducts)
  */
 router.get('/:id', controller.getProductById)
 
+/**
+ * @swagger
+ * /products/search/{query}:
+ *   get:
+ *     summary: Obtener productos por (query)
+ *     tags:
+ *       - Productos
+ *     parameters:
+ *       - in: path
+ *         name: query
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: query para buscar productos
+ *     responses:
+ *       200:
+ *         description: Producto encontrado.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Product'
+ */
+router.get('/search/:query', controller.getProductsByQuery)
+
 module.exports = router

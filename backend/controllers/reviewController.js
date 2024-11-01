@@ -13,7 +13,7 @@ exports.index = async (req, res, next) => {
 exports.show = async (req, res, next) => {
   try {
     const review = await Review.findByPk(req.params.id)
-    if (!review) notFoundError('Marca no encontrada', 'REVIEW_NOT_FOUND')
+    if (!review) notFoundError('Reseña no encontrada', 'REVIEW_NOT_FOUND')
     res.json(review)
   } catch (error) {
     next(error)

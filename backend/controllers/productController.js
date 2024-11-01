@@ -24,3 +24,13 @@ exports.getProductById = async (req, res, next) => {
     next(error)
   }
 }
+
+exports.getProductsByQuery = async (req, res, next) => {
+  const { query } = req.params
+  try {
+    const products = await productService.getByQuery(query)
+    res.json(products)
+  } catch (error) {
+    next(error)
+  }
+}

@@ -13,7 +13,7 @@
  *           type: string
  *           description: Título del banner
  *           example: "¡Oferta del mes!"
- *         imageUrl:
+ *         image_url:
  *           type: string
  *           description: URL de la imagen del banner
  *           example: "https://example.com/image.png"

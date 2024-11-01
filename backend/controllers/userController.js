@@ -1,9 +1,9 @@
-const { User } = require('../models/index.js')
+const userService = require('../services/users/index.service.js')
 const { notFoundError } = require('../helpers/error.helper.js')
 
 exports.index = async (req, res, next) => {
   try {
-    const users = await User.findAll()
+    const users = await userService.getAll()
     res.json(users)
   } catch (error) {
     next(error)
@@ -12,8 +12,8 @@ exports.index = async (req, res, next) => {
 
 exports.show = async (req, res, next) => {
   try {
-    const user = await User.findByPk(req.params.id)
-    if (!user) notFoundError('Marca no encontrada', 'USER_NOT_FOUND')
+    const user = await userService.getById(req.params.id)
+    if (!user) notFoundError('Usuario no encontrado', 'USER_NOT_FOUND')
     res.json(user)
   } catch (error) {
     next(error)
