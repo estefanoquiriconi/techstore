@@ -147,4 +147,22 @@ public class HomeViewModel extends ViewModel {
         });
     }
 
+    public void getProductsByQuery(String query){
+        isLoadingProducts.setValue(true);
+        apiService.getProductsByQuery(query).enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<Product>> call, @NonNull Response<List<Product>> response) {
+                if(response.isSuccessful() && response.body() != null){
+                    products.setValue(response.body());
+                }
+                isLoadingProducts.setValue(false);
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<Product>> call, @NonNull Throwable t) {
+                isLoadingProducts.setValue(false);
+            }
+        });
+    }
+
 }

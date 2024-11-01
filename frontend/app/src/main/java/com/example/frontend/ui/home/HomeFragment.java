@@ -1,15 +1,26 @@
 package com.example.frontend.ui.home;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
+import com.example.frontend.R;
 import com.example.frontend.databinding.FragmentHomeBinding;
+import com.example.frontend.ui.login.LoginActivity;
 
 public class HomeFragment extends Fragment {
 
@@ -18,6 +29,7 @@ public class HomeFragment extends Fragment {
     private CategoryAdapter categoryAdapter;
     private BannerAdapter bannerAdapter;
     private ProductAdapter productAdapter;
+    private final Handler sliderHandler = new Handler();
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(this).get(HomeViewModel.class);
@@ -28,6 +40,7 @@ public class HomeFragment extends Fragment {
         observerViewModel();
         loadData();
 
+        startAutoSlide();
         return binding.getRoot();
     }
 
@@ -37,19 +50,33 @@ public class HomeFragment extends Fragment {
         setupProductRecyclerView();
     }
 
-    public void setupListeners(){
+    public void setupListeners() {
         categoryAdapter.setOnItemCLickListener(category -> viewModel.getFilterProducts(category.getName(), null));
 
         binding.btnMinPrice.setOnClickListener(v -> {
-            viewModel.getFilterProducts(viewModel.getCategoryFilter().getValue(),"asc");
+            viewModel.getFilterProducts(viewModel.getCategoryFilter().getValue(), "asc");
         });
 
         binding.btnMayPrice.setOnClickListener(v -> {
-            viewModel.getFilterProducts(viewModel.getCategoryFilter().getValue() ,"desc");
+            viewModel.getFilterProducts(viewModel.getCategoryFilter().getValue(), "desc");
         });
 
-        binding.tvSeeAll.setOnClickListener(v -> {
+        binding.tvSeeAllCategories.setOnClickListener(v -> {
             viewModel.loadProducts();
+        });
+
+        binding.tvSeeAllProducts.setOnClickListener(v -> {
+            viewModel.loadProducts();
+        });
+
+        binding.editTextSearch.setOnEditorActionListener((v, actionId, event) -> {
+            String query = binding.editTextSearch.getText().toString().trim();
+            if (!query.isEmpty()) {
+                viewModel.getProductsByQuery(query);
+                InputMethodManager inputMM = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputMM.hideSoftInputFromWindow(v.getWindowToken(), 0);
+            }
+            return true;
         });
     }
 
@@ -70,6 +97,20 @@ public class HomeFragment extends Fragment {
         binding.viewPager2.setAdapter(bannerAdapter);
     }
 
+    public void startAutoSlide() {
+        sliderHandler.postDelayed(slideRunnable, 5000);
+    }
+
+    public Runnable slideRunnable = new Runnable() {
+        @Override
+        public void run() {
+            int currentItem = binding.viewPager2.getCurrentItem();
+            int totalItems = bannerAdapter.getItemCount();
+            binding.viewPager2.setCurrentItem((currentItem + 1) % totalItems, true);
+            sliderHandler.postDelayed(this, 5000);
+        }
+    };
+
     private void observerViewModel() {
         viewModel.getCategories().observe(getViewLifecycleOwner(), categories -> categoryAdapter.setCategories(categories));
 
@@ -79,8 +120,19 @@ public class HomeFragment extends Fragment {
 
         viewModel.getIsLoadingBanners().observe(getViewLifecycleOwner(), isLoading -> binding.progressBarBanner.setVisibility(isLoading ? View.VISIBLE : View.GONE));
 
-        viewModel.getProducts().observe(getViewLifecycleOwner(), products -> productAdapter.setProducts(products));
-
+        viewModel.getProducts().observe(getViewLifecycleOwner(), products -> {
+            if (products.isEmpty()) {
+                new AlertDialog.Builder(requireContext())
+                        .setTitle("Producto no encontrado")
+                        .setMessage("No pudimos encontrar ningún producto que coincida con tu búsqueda")
+                        .setPositiveButton("Mostrar todos", (dialog, which) -> {
+                            viewModel.loadProducts();
+                            dialog.dismiss();
+                        })
+                        .show();
+            }
+            productAdapter.setProducts(products);
+        });
         viewModel.getIsLoadingProducts().observe(getViewLifecycleOwner(), isLoading -> binding.progressBarProduct.setVisibility(isLoading ? View.VISIBLE : View.GONE));
     }
 
@@ -94,5 +146,6 @@ public class HomeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        sliderHandler.removeCallbacks(slideRunnable);
     }
 }

@@ -36,4 +36,14 @@
     <string name="title_order">Mis compras</string>
     <string name="title_profile">Perfil</string>
     <string name="banner_image">banner image</string>
+    <string name="higher_price">Mayor precio</string>
+    <string name="lower_price">Menor precio</string>
+    <string name="search_hint">Buscar...</string>
+    <string name="description_profile_image">Imagen de perfil</string>
+    <string name="categories">Categorías</string>
+    <string name="see_all">Ver todas</string>
+    <string name="see_all_products">Mostrar todos</string>
+    <string name="products">Productos</string>
+    <string name="username">Username</string>
+    <string name="welcome">Bienvenido</string>
 </resources>
