@@ -28,6 +28,9 @@ public class HomeViewModel extends ViewModel {
     private final MutableLiveData<Boolean> isLoadingBanners;
     private final MutableLiveData<Boolean> isLoadingProducts;
 
+    private final MutableLiveData<String> categoryFilter;
+    private final MutableLiveData<String> sortOrderFilter;
+
     public HomeViewModel() {
         apiService = RetrofitClient.getClient().create(ApiService.class);
         categories = new MutableLiveData<>();
@@ -36,6 +39,8 @@ public class HomeViewModel extends ViewModel {
         isLoadingCategories = new MutableLiveData<>();
         isLoadingBanners = new MutableLiveData<>();
         isLoadingProducts = new MutableLiveData<>();
+        categoryFilter = new MutableLiveData<>();
+        sortOrderFilter = new MutableLiveData<>();
     }
 
     public LiveData<List<Category>> getCategories() {
@@ -61,6 +66,10 @@ public class HomeViewModel extends ViewModel {
     public LiveData<Boolean> getIsLoadingProducts() {
         return isLoadingProducts;
     }
+
+    public LiveData<String> getCategoryFilter() { return categoryFilter; }
+
+    public LiveData<String> getSortOrderFilter() { return sortOrderFilter; }
 
     public void loadCategories() {
         isLoadingCategories.setValue(true);
@@ -100,7 +109,29 @@ public class HomeViewModel extends ViewModel {
 
     public void loadProducts() {
         isLoadingProducts.setValue(true);
+        this.categoryFilter.setValue(null);
+        this.sortOrderFilter.setValue(null);
         apiService.getProducts().enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<Product>> call, @NonNull Response<List<Product>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    products.setValue(response.body());
+                }
+                isLoadingProducts.setValue(false);
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<Product>> call, @NonNull Throwable t) {
+                isLoadingProducts.setValue(false);
+            }
+        });
+    }
+
+    public void getFilterProducts(String category, String order) {
+        isLoadingProducts.setValue(true);
+        this.categoryFilter.setValue(category);
+        this.sortOrderFilter.setValue(order);
+        apiService.getFilterProducts(categoryFilter.getValue(), "price", sortOrderFilter.getValue()).enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(@NonNull Call<List<Product>> call, @NonNull Response<List<Product>> response) {
                 if (response.isSuccessful() && response.body() != null) {

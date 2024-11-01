@@ -20,12 +20,21 @@ import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
 
+    public interface OnItemClickListener {
+        void onItemClick(Category category);
+    }
+
     private List<Category> categories;
     private final Context context;
+    private OnItemClickListener listener;
 
     public CategoryAdapter(Context context){
         this.context = context;
         this.categories = new ArrayList<>();
+    }
+
+    public void setOnItemCLickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -45,7 +54,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
         Category category = categories.get(position);
-        holder.bind(category);
+        holder.bind(category, listener);
     }
 
     @Override
@@ -64,12 +73,18 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             tvCategoryName = itemView.findViewById(R.id.tvCategoryName);
         }
 
-        public void bind(Category category){
+        public void bind(Category category, OnItemClickListener listener){
             tvCategoryName.setText(category.getName());
 
             Glide.with(context)
                     .load(category.getImage_url())
                     .into(ivCategory);
+
+            itemView.setOnClickListener(view -> {
+                if( listener != null){
+                    listener.onItemClick(category);
+                }
+            });
         }
     }
 }

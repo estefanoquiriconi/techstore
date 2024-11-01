@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
 import com.example.frontend.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
@@ -25,6 +24,7 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
 
         setupUI();
+        setupListeners();
         observerViewModel();
         loadData();
 
@@ -35,6 +35,22 @@ public class HomeFragment extends Fragment {
         setupCategoryRecyclerView();
         setupBannerViewPager();
         setupProductRecyclerView();
+    }
+
+    public void setupListeners(){
+        categoryAdapter.setOnItemCLickListener(category -> viewModel.getFilterProducts(category.getName(), null));
+
+        binding.btnMinPrice.setOnClickListener(v -> {
+            viewModel.getFilterProducts(viewModel.getCategoryFilter().getValue(),"asc");
+        });
+
+        binding.btnMayPrice.setOnClickListener(v -> {
+            viewModel.getFilterProducts(viewModel.getCategoryFilter().getValue() ,"desc");
+        });
+
+        binding.tvSeeAll.setOnClickListener(v -> {
+            viewModel.loadProducts();
+        });
     }
 
     private void setupProductRecyclerView() {

@@ -8,6 +8,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 public interface ApiService {
 
@@ -19,5 +20,13 @@ public interface ApiService {
 
     @GET("api/products")
     Call<List<Product>> getProducts();
+
+    @GET("api/products")
+    Call<List<Product>> getFilterProducts(
+            @Query("category") String category,
+            @Query("sortBy") String sortBy,
+            @Query("order") String order
+    );
+
 
 }
