@@ -8,7 +8,7 @@ const controller = require('../controllers/productController')
  *   get:
  *     summary: Obtener todos los productos
  *     tags:
- *       - Productos
+ *       - Products
  *     parameters:
  *       - in: query
  *         name: category
@@ -48,7 +48,7 @@ router.get('/', controller.getAllProducts)
  *   get:
  *     summary: Obtener un producto por ID
  *     tags:
- *       - Productos
+ *       - Products
  *     parameters:
  *       - in: path
  *         name: id
@@ -72,7 +72,7 @@ router.get('/:id', controller.getProductById)
  *   get:
  *     summary: Obtener productos por (query)
  *     tags:
- *       - Productos
+ *       - Products
  *     parameters:
  *       - in: path
  *         name: query

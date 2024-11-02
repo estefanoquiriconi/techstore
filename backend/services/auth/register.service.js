@@ -1,14 +1,14 @@
 const { User } = require('../../models/index.js')
 const { internalServerError } = require('../../helpers/error.helper')
 
-const register = async (first_name, last_name, email, password, registration_code) => {
+const register = async (firstName, lastName, email, password, registrationCode) => {
   try {
     const newUser = await User.create({
-      first_name,
-      last_name,
+      first_name: firstName,
+      last_name: lastName,
       email,
       password,
-      registration_code
+      registration_code: registrationCode
     })
     return newUser
   } catch (error) {

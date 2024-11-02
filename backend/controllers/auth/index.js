@@ -5,12 +5,11 @@ const { recoverPassword } = require('./recoverPassword')
 const { verifyRecoverCode } = require('./verifyRecoverCode')
 const { resetPassword } = require('./resetPassword')
 
-
 module.exports = {
-    login,
-    register,
-    activateAccount,
-    recoverPassword,
-    verifyRecoverCode,
-    resetPassword
+  login,
+  register,
+  activateAccount,
+  recoverPassword,
+  verifyRecoverCode,
+  resetPassword
 }
