@@ -14,5 +14,6 @@ router.post('/activate', registrationCodeValidation, authController.activateAcco
 router.post('/recover-password', authController.recoverPassword)
 router.post('/verify-recover-code', recoverpassCodeValidation, authController.verifyRecoverCode)
 router.post('/reset-password', authController.resetPassword)
+router.get('/verify-token', authController.verifyToken)
 
 module.exports = router

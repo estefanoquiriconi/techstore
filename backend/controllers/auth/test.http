@@ -50,3 +50,8 @@ Content-Type: application/json
   "email" : "estefanoquiriconi@gmail.com",
   "new_password" : "123"
 }
+
+### Probar el endpoint para verificar tokens
+GET http://localhost:3000/api/auth/verify-token
+Content-Type: application/json
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJlc3RlZmFub3F1aXJpY29uaUBnbWFpbC5jb20iLCJpYXQiOjE3MzA1OTg2NDUsImV4cCI6MTczMDYwMjI0NX0.UY9LJxuBSdAgAMvoaOBvuTtDf00qUocOB26KUf_tvEY

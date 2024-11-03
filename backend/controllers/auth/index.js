@@ -4,6 +4,7 @@ const { activateAccount } = require('./activateAccount')
 const { recoverPassword } = require('./recoverPassword')
 const { verifyRecoverCode } = require('./verifyRecoverCode')
 const { resetPassword } = require('./resetPassword')
+const { verifyToken } = require('./verifyTokenController.js')
 
 module.exports = {
   login,
@@ -11,5 +12,6 @@ module.exports = {
   activateAccount,
   recoverPassword,
   verifyRecoverCode,
-  resetPassword
+  resetPassword,
+  verifyToken
 }
