@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.frontend.data.models.Banner;
 import com.example.frontend.data.models.Category;
 import com.example.frontend.data.models.Product;
+import com.example.frontend.data.models.User;
 import com.example.frontend.data.services.ApiService;
 import com.example.frontend.utils.RetrofitClient;
 
@@ -27,9 +28,9 @@ public class HomeViewModel extends ViewModel {
     private final MutableLiveData<Boolean> isLoadingCategories;
     private final MutableLiveData<Boolean> isLoadingBanners;
     private final MutableLiveData<Boolean> isLoadingProducts;
-
     private final MutableLiveData<String> categoryFilter;
     private final MutableLiveData<String> sortOrderFilter;
+    private final MutableLiveData<User> user;
 
     public HomeViewModel() {
         apiService = RetrofitClient.getClient().create(ApiService.class);
@@ -41,6 +42,7 @@ public class HomeViewModel extends ViewModel {
         isLoadingProducts = new MutableLiveData<>();
         categoryFilter = new MutableLiveData<>();
         sortOrderFilter = new MutableLiveData<>();
+        user = new MutableLiveData<>();
     }
 
     public LiveData<List<Category>> getCategories() {
@@ -67,9 +69,17 @@ public class HomeViewModel extends ViewModel {
         return isLoadingProducts;
     }
 
-    public LiveData<String> getCategoryFilter() { return categoryFilter; }
+    public LiveData<String> getCategoryFilter() {
+        return categoryFilter;
+    }
 
-    public LiveData<String> getSortOrderFilter() { return sortOrderFilter; }
+    public LiveData<String> getSortOrderFilter() {
+        return sortOrderFilter;
+    }
+
+    public LiveData<User> getUser() {
+        return user;
+    }
 
     public void loadCategories() {
         isLoadingCategories.setValue(true);
@@ -147,12 +157,12 @@ public class HomeViewModel extends ViewModel {
         });
     }
 
-    public void getProductsByQuery(String query){
+    public void getProductsByQuery(String query) {
         isLoadingProducts.setValue(true);
         apiService.getProductsByQuery(query).enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(@NonNull Call<List<Product>> call, @NonNull Response<List<Product>> response) {
-                if(response.isSuccessful() && response.body() != null){
+                if (response.isSuccessful() && response.body() != null) {
                     products.setValue(response.body());
                 }
                 isLoadingProducts.setValue(false);
@@ -161,6 +171,21 @@ public class HomeViewModel extends ViewModel {
             @Override
             public void onFailure(@NonNull Call<List<Product>> call, @NonNull Throwable t) {
                 isLoadingProducts.setValue(false);
+            }
+        });
+    }
+
+    public void loadUser(int id) {
+        apiService.getUserById(id).enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    user.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
             }
         });
     }

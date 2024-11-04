@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
         loginViewModel.getApiResponse().observe(this, response -> {
             loadingDialogFragment.dismiss();
             if (response != null && response.getStatus().equals("success")) {
-                saveToken(response.getToken());
+                saveUserInfo(response.getUser_id(), response.getToken());
                 startActivity(new Intent(this, HomeActivity.class));
                 finish();
             }
@@ -97,18 +97,17 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void saveToken(String token) {
-        SharedPreferences sharedPreferences = getSharedPreferences("user_tokens", MODE_PRIVATE);
+    public void saveUserInfo(int userId, String token) {
+        SharedPreferences sharedPreferences = getSharedPreferences("userPreferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("auth_token", token);
+        editor.putString("token", token);
+        editor.putInt("user_id", userId);
         editor.apply();
     }
 
     private boolean validateInputs() {
-
         String email = binding.editTextEmail.getText().toString().trim();
         String password = binding.editTextPassword.getText().toString();
-
 
         if (TextUtils.isEmpty(email)) {
             binding.editTextEmail.setError("El correo no puede estar vacío");

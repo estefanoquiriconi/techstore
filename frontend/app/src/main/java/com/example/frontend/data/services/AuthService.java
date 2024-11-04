@@ -1,5 +1,6 @@
 package com.example.frontend.data.services;
 
+import com.example.frontend.data.models.User;
 import com.example.frontend.data.models.auth.ActivateAccountRequest;
 import com.example.frontend.data.models.auth.LoginRequest;
 import com.example.frontend.data.models.auth.ApiResponse;
@@ -11,6 +12,8 @@ import com.example.frontend.data.models.auth.VerifyCodeRequest;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 
 public interface AuthService {
@@ -31,4 +34,8 @@ public interface AuthService {
 
     @POST("api/auth/reset-password")
     Call<ApiResponse> resetPassword(@Body ResetPasswordRequest requestPasswordRequest);
+
+    @GET("api/auth/verify-token")
+    Call<User> verifyToken(@Header("Authorization") String token);
+
 }

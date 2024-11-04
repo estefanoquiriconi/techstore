@@ -1,10 +1,12 @@
 package com.example.frontend.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -12,9 +14,18 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.frontend.HomeActivity;
 import com.example.frontend.R;
+import com.example.frontend.data.models.User;
+import com.example.frontend.data.services.AuthService;
 import com.example.frontend.ui.login.LoginActivity;
+import com.example.frontend.utils.RetrofitClient;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SplashActivity extends AppCompatActivity {
+
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +38,41 @@ public class SplashActivity extends AppCompatActivity {
             return insets;
         });
 
-        new Handler().postDelayed(() -> {
-            Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
-            startActivity(intent);
-            finish();
-        }, 2000);
+        SharedPreferences sharedPreferences = getSharedPreferences("userPreferences", MODE_PRIVATE);
+        String token = sharedPreferences.getString("token", null);
+
+        if (token == null) {
+            navigateToLogin();
+            return;
+        }
+
+        AuthService authService = RetrofitClient.getClient().create(AuthService.class);
+
+        authService.verifyToken("Bearer " + token).enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    navigateToHome();
+                } else {
+                    navigateToLogin();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
+                navigateToLogin();
+            }
+        });
+
+    }
+
+    private void navigateToHome() {
+        startActivity(new Intent(this, HomeActivity.class));
+        finish();
+    }
+
+    private void navigateToLogin() {
+        startActivity(new Intent(this, LoginActivity.class));
+        finish();
     }
 }

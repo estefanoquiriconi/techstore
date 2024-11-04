@@ -1,59 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    android:elevation="4dp"
     android:clickable="true"
+    android:elevation="4dp"
     android:focusable="true"
     android:foreground="?attr/selectableItemBackground">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="130dp"
-    android:layout_margin="8dp"
-    android:padding="16dp">
-
-    <ImageView
-        android:id="@+id/ivProduct"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        tools:srcCompat="@tools:sample/avatars" />
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="16dp"
-        android:orientation="vertical">
+        android:layout_height="130dp"
+        android:layout_margin="8dp"
+        android:padding="16dp">
 
-        <TextView
-            android:id="@+id/tvProductName"
+        <ImageView
+            android:id="@+id/ivProduct"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:contentDescription="@string/description_product_image"
+            tools:ignore="ImageContrastCheck"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="Nombre del producto"
-            android:textSize="18sp" />
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvProductDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="3"
-            android:minLines="3"
-            android:text="Descripción" />
+            <TextView
+                android:id="@+id/tvProductName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="@string/product_name"
+                android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/tvProductPrice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_bold"
-            android:layout_marginTop="5dp"
-            android:gravity="end"
-            android:text="$999.999" />
+            <TextView
+                android:id="@+id/tvProductDescription"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:minLines="2"
+                android:text="@string/description_product" />
 
+            <TextView
+                android:id="@+id/tvProductPrice"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:fontFamily="@font/montserrat_bold"
+                android:gravity="end"
+                android:text="@string/product_price" />
+
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
 </androidx.cardview.widget.CardView>
