@@ -12,6 +12,8 @@ CREATE TABLE users (
     avatar VARCHAR(255),
     phone VARCHAR(20),
     address VARCHAR(255),
+    latitude DECIMAL(9, 6),
+    longitude DECIMAL(9, 6),
     password VARCHAR(255),
     active BOOLEAN DEFAULT TRUE,
     registration_code VARCHAR(50),

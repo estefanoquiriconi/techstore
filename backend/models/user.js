@@ -26,6 +26,12 @@ const User = sequelize.define('User', {
   address: {
     type: DataTypes.STRING
   },
+  latitude: {
+    type: DataTypes.DECIMAL(9, 6)
+  },
+  longitude: {
+    type: DataTypes.DECIMAL(9, 6)
+  },
   password: {
     type: DataTypes.STRING
   },

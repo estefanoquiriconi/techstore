@@ -9,6 +9,8 @@ const getAll = async () => {
       'email',
       'phone',
       'address',
+      'latitude',
+      'longitude',
       'avatar'
     ]
   })

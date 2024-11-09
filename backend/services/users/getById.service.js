@@ -9,6 +9,8 @@ const getById = async (id) => {
       'email',
       'phone',
       'address',
+      'latitude',
+      'longitude',
       'avatar'
     ]
   })

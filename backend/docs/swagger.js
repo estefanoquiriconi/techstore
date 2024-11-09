@@ -12,6 +12,10 @@ const swaggerDefinition = {
     {
       url: 'http://localhost:3000/api/',
       description: 'Servidor local'
+    },
+    {
+      url: 'https://e7a0-181-199-152-112.ngrok-free.app/api/',
+      description: 'Servidor de producción'
     }
   ]
 }
