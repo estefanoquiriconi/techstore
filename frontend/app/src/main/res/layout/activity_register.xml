@@ -180,7 +180,6 @@
                 android:gravity="center"
                 android:padding="15dp"
                 android:text="@string/already_have_account"
-                android:textColor="@color/misty_mauve"
                 android:textSize="@dimen/text_size" />
 
         </LinearLayout>

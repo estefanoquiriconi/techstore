@@ -13,9 +13,9 @@
     <string name="register">Registrarse</string>
     <string name="sign_in">Iniciar sesión</string>
     <string name="send_button">Enviar</string>
-    <string name="already_have_account">Ya tienes una cuenta? <font color="#FF000000">Iniciar sesión</font></string>
+    <string name="already_have_account">Ya tienes una cuenta? Iniciar sesión</string>
     <string name="forgot_password">Has olvidado tu contraseña</string>
-    <string name="no_account">No tienes una cuenta? <font color="#FF000000">Registrarse</font></string>
+    <string name="no_account">No tienes una cuenta? Registrarse</string>
     <string name="forgot_password_question">¿Olvidó su contraseña?</string>
     <string name="password_reset_message">¡Tu contraseña ha sido restablecida!</string>
     <string name="done">Hecho</string>
@@ -50,4 +50,7 @@
     <string name="description_product">Descripción</string>
     <string name="product_name">Nombre del producto</string>
     <string name="product_price">$999.999</string>
+    <string name="personal_information">Información Personal</string>
+    <string name="phone">Teléfono</string>
+    <string name="address">Dirección</string>
 </resources>

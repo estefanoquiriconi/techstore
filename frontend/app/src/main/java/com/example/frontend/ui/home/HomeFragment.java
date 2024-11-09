@@ -134,12 +134,11 @@ public class HomeFragment extends Fragment {
         viewModel.getIsLoadingProducts().observe(getViewLifecycleOwner(), isLoading -> binding.progressBarProduct.setVisibility(isLoading ? View.VISIBLE : View.GONE));
 
         viewModel.getUser().observe(getViewLifecycleOwner(), user -> {
-            binding.tvUserName.setText(user.getFirst_name());
+            binding.tvUserName.setText(user.getFirstName());
             Glide.with(this)
                     .load(user.getAvatar())
                     .transform(new CircleCrop())
                     .into(binding.ivProfile);
-
         });
     }
 

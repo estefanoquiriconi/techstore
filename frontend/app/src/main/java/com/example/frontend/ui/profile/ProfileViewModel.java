@@ -1,19 +1,46 @@
 package com.example.frontend.ui.profile;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.frontend.data.models.User;
+import com.example.frontend.data.services.ApiService;
+import com.example.frontend.utils.RetrofitClient;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class ProfileViewModel extends ViewModel {
 
-    private final MutableLiveData<String> mText;
+    private final ApiService apiService;
+    private final MutableLiveData<User> user;
 
     public ProfileViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is profile fragment");
+        this.user = new MutableLiveData<>();
+        apiService = RetrofitClient.getClient().create(ApiService.class);
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<User> getUser() {
+        return user;
     }
+
+    public void loadUser(int id) {
+        apiService.getUserById(id).enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    user.postValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
+                //TODO
+            }
+        });
+    }
+
 }

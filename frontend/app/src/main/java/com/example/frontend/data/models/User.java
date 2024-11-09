@@ -8,39 +8,34 @@ public class User {
     private String email;
     private String phone;
     private String address;
+    private double latitude;
+    private double longitude;
     private String avatar;
 
-    public User(int id, String first_name, String last_name, String email, String phone, String address, String avatar) {
-        this.id = id;
+    public User(String first_name, String last_name, String email, String phone, String address, double latitude, double longitude, String avatar) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
         this.phone = phone;
         this.address = address;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.avatar = avatar;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getFirst_name() {
+    public String getFirstName() {
         return first_name;
     }
 
-    public void setFirst_name(String first_name) {
+    public void setFirstName(String first_name) {
         this.first_name = first_name;
     }
 
-    public String getLast_name() {
+    public String getLastName() {
         return last_name;
     }
 
-    public void setLast_name(String last_name) {
+    public void setLastName(String last_name) {
         this.last_name = last_name;
     }
 
@@ -66,6 +61,22 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
     public String getAvatar() {
