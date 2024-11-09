@@ -27,6 +27,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class ProfileFragment extends Fragment {
 
@@ -38,22 +39,13 @@ public class ProfileFragment extends Fragment {
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         setupViewModel();
 
-        binding.floatingActionButtonLogout.setOnClickListener(v -> {
-            SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("userPreferences", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.remove("token");
-            editor.remove("user_id");
-            editor.apply();
-
-            startActivity(new Intent(requireActivity(), LoginActivity.class));
-            requireActivity().finish();
-        });
+        binding.floatingActionButtonLogout.setOnClickListener(v -> handleLogout());
 
         profileViewModel.loadUser(requireActivity().getSharedPreferences("userPreferences", Context.MODE_PRIVATE).getInt("user_id", 1));
         return binding.getRoot();
     }
 
-    private void setupViewModel(){
+    private void setupViewModel() {
         profileViewModel.getUser().observe(getViewLifecycleOwner(), user -> {
             String fullUserName = user.getFirstName() + " " + user.getLastName();
             LatLng latLng = new LatLng(user.getLatitude(), user.getLongitude());
@@ -67,13 +59,31 @@ public class ProfileFragment extends Fragment {
                     .into(binding.profileImage);
 
             SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.mapProfile);
-            if (mapFragment != null){
+            if (mapFragment != null) {
                 mapFragment.getMapAsync(googleMap -> {
                     googleMap.addMarker(new MarkerOptions().position(latLng).title("Tu ubicación"));
                     googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
                 });
             }
         });
+    }
+
+    private void handleLogout() {
+        new MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Cerrar sesión")
+                .setMessage("¿Estás seguro que deseas cerrar sesión?")
+                .setPositiveButton("Sí", (dialog, which) -> {
+                    SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("userPreferences", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.remove("token");
+                    editor.remove("user_id");
+                    editor.apply();
+
+                    startActivity(new Intent(requireActivity(), LoginActivity.class));
+                    requireActivity().finish();
+                })
+                .setNegativeButton("No", null)
+                .show();
     }
 
     @Override
