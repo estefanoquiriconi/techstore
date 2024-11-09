@@ -35,8 +35,6 @@ android {
 }
 
 dependencies {
-    implementation(libs.retrofit)
-    implementation(libs.converter.gson)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -47,9 +45,16 @@ dependencies {
     implementation(libs.navigation.ui)
     implementation(libs.legacy.support.v4)
 
+    //Retrofit para peticiones http
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
     //Glide para cargar imágenes
     implementation(libs.glide)
     annotationProcessor(libs.compiler)
+
+    //Maps
+    implementation(libs.play.services.maps)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
