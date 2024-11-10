@@ -3,6 +3,7 @@ package com.example.frontend.data.services;
 import com.example.frontend.data.models.Banner;
 import com.example.frontend.data.models.Category;
 import com.example.frontend.data.models.Product;
+import com.example.frontend.data.models.Review;
 import com.example.frontend.data.models.User;
 
 import java.util.List;
@@ -35,5 +36,11 @@ public interface ApiService {
 
     @GET("api/users/{id}")
     Call<User> getUserById(@Path("id") int id);
+
+    @GET("api/products/{id}")
+    Call<Product> getProduct(@Path("id") int productId);
+
+    @GET("api/reviews/product/{id}")
+    Call<List<Review>> getProductReviews(@Path("id") int productId);
 
 }

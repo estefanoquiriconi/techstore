@@ -1,52 +1,86 @@
 package com.example.frontend.ui.home;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.example.frontend.R;
+import com.example.frontend.data.models.Product;
+import com.example.frontend.data.models.Review;
+import com.example.frontend.databinding.ActivityProductDetailBinding;
 
+import java.text.MessageFormat;
 import java.text.NumberFormat;
+import java.util.List;
 import java.util.Locale;
 
 public class ProductDetailActivity extends AppCompatActivity {
+
+    private ProductDetailViewModel viewModel;
+    private ActivityProductDetailBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_product_detail);
+        binding = ActivityProductDetailBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        ImageView ivProductImage = findViewById(R.id.ivProductImage);
-        TextView tvProductName = findViewById(R.id.tvProductName);
-        TextView tvProductPrice = findViewById(R.id.tvProductPrice);
-        TextView tvProductDescription = findViewById(R.id.tvProductDescription);
-        TextView tvProductStock = findViewById(R.id.tvProductStock);
+        int productId = getIntent().getIntExtra("product_id", -1);
+        if (productId == -1) {
+            finish();
+            return;
+        }
 
-        Intent intent = getIntent();
-        String name = intent.getStringExtra("name");
-        String price = intent.getStringExtra("price");
-        String description = intent.getStringExtra("description");
-        String imageUrl = intent.getStringExtra("image_url");
-        int stock = intent.getIntExtra("stock", 0);
-        String stockStr = "Stock disponible: " + stock;
+        viewModel = new ViewModelProvider(this).get(ProductDetailViewModel.class);
+        setupObservers();
+        viewModel.loadProductDetail(productId);
+    }
 
-        tvProductName.setText(name);
-        tvProductDescription.setText(description);
-        tvProductStock.setText(stockStr);
+    private void setupObservers() {
+        viewModel.getProduct().observe(this, this::updateProductUI);
+        viewModel.getReviews().observe(this, this::updateReviewsUI);
+        viewModel.getError().observe(this, this::showError);
+    }
 
+    private void updateProductUI(Product product) {
+        binding.tvName.setText(product.getName());
         NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("es", "AR"));
-        if(price != null) tvProductPrice.setText(formatter.format(Double.parseDouble(price)));
+        binding.tvPrice.setText(formatter.format(Double.parseDouble(product.getPrice())));
+        binding.tvDescription.setText(product.getDescription());
+        binding.tvStock.setText(MessageFormat.format("Stock: {0}", product.getStock()));
 
         Glide.with(this)
-                .load(imageUrl)
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(ivProductImage);
+                .load(product.getImageUrl())
+                .into(binding.ivProduct);
+    }
+
+    private void updateReviewsUI(List<Review> reviews) {
+        if (reviews.isEmpty()) {
+            binding.tvNoReviews.setVisibility(View.VISIBLE);
+            binding.recyclerReviews.setVisibility(View.GONE);
+        } else {
+            binding.tvNoReviews.setVisibility(View.GONE);
+            binding.recyclerReviews.setVisibility(View.VISIBLE);
+
+            ReviewsAdapter adapter = new ReviewsAdapter(reviews);
+            binding.recyclerReviews.setAdapter(adapter);
+
+            float averageRating = (float) reviews.stream()
+                    .mapToInt(Review::getRating)
+                    .average()
+                    .orElse(0.0);
+
+            binding.tvAverageRating.setText(String.format(Locale.getDefault(), "%.1f", averageRating));
+            binding.ratingBarAverage.setRating(averageRating);
+        }
+    }
+
+    private void showError(String error) {
+        Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
     }
 }

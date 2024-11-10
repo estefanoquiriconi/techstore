@@ -53,4 +53,7 @@
     <string name="personal_information">Información Personal</string>
     <string name="phone">Teléfono</string>
     <string name="address">Dirección</string>
+    <string name="no_reviews">No hay reseñas disponibles</string>
+    <string name="reviews">Reseñas</string>
+    <string name="add_to_cart">Agregar al carrito</string>
 </resources>
