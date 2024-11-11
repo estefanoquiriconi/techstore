@@ -1,5 +1,5 @@
 ## **TechStore**  🎧📱💻✨
-Una aplicación de tienda electrónica donde los usuarios pueden explorar, comprar y gestionar pedidos de productos tecnológicos.
+Una aplicación de tienda electrónica donde los usuarios pueden explorar y comprar productos tecnológicos.
 
 ## Organización del Proyecto
 
@@ -28,43 +28,32 @@ El diseño de las pantallas del proyecto los estoy haciendo en Figma.
 ---
 
 ## **Descripción**  
-TechStore es una aplicación móvil diseñada para ofrecer una experiencia eficiente en la compra de productos tecnológicos, como celulares, notebooks, tablets y accesorios. Incluye funcionalidades como autenticación, búsqueda avanzada, carrito de compras, gestión de pedidos y reseñas de productos. Además, cuenta con **geolocalización** para sugerir automáticamente la dirección del usuario durante el checkout.
+TechStore es una aplicación móvil diseñada para ofrecer una experiencia eficiente en la compra de productos tecnológicos, como celulares, notebooks, tablets y auriculares. Incluye funcionalidades como autenticación, búsqueda avanzada, carrito de compras, historial de compras y reseñas de productos. Además, cuenta con **geolocalización** para visualizar la dirección del usuario.
 
 ---
 
 ## **Características**  
 - **Registro y autenticación:**  
-  El sistema permite registrarse y autenticarse mediante email.  
+  El sistema permite registrarse y autenticarse mediante correo electrónico.  
 - **Exploración de productos:**  
-  Búsqueda por categorías y filtros (precio, marca).  
+  Búsqueda de productos, filtro por categoría, ordenamiento por menor o mayor precio.  
 - **Carrito de compras:**  
-  Agregar, modificar o eliminar productos.
+  Agregar, modificar cantidades o eliminar productos.
 - **Gestión de pedidos:**  
   Visualización del estado y acceso al historial de pedidos.  
 - **Reseñas:**  
   Los usuarios pueden valorar productos y ver reseñas de otros clientes.  
 - **Geolocalización:**  
-  El sistema sugiere automáticamente la dirección del usuario mediante GPS, y permite guardar múltiples direcciones para futuras compras.
+  El sistema sugiere automáticamente la dirección del usuario mediante GPS.
 
 ---
 
 ## **Uso**
 1. **Registro e Inicio de Sesión:** Crea una cuenta o ingresa usando tus credenciales.  
 2. **Explora Productos:** Navega por categorías o busca productos específicos.  
-3. **Agrega al Carrito:** Selecciona productos y agrega al carrito.  
-4. **Checkout:** Ingresa tu dirección manualmente o selecciona una dirección guardada. 
-5. **Realiza el Pago:** Selecciona tu método de pago y confirma el pedido.  
-6. **Historial de Pedidos:** Visualiza el estado actual y revisa pedidos anteriores.
-
----
-
-## **Funcionalidad de Geolocalización**
-
-1. **Descripción:**  
-   * En el proceso de checkout, se sugiere      automáticamente la dirección del usuario basándose en la ubicación obtenida por GPS.
-   * El usuario puede guardar varias direcciones para seleccionarlas rápidamente en futuras compras.
-   
-
+3. **Agrega al Carrito:** Selecciona productos y agrega al carrito.
+4. **Perfil:** Visualiza la información del usuario. 
+5. **Historial de Pedidos:** Visualiza el estado actual y revisa pedidos anteriores.
 ---
 
 ## **Arquitectura del Proyecto**
