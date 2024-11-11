@@ -1,8 +1,7 @@
 # Documentación de la base de datos
 
 ## Descripción general
-La base de datos `techstore_db` está diseñada para gestionar una tienda en línea de productos tecnológicos. Incluye funcionalidades para manejar usuarios, productos, categorías, marcas, pedidos, reseñas y direcciones almacenadas por los usuarios.
-
+La base de datos `techstore_db` está diseñada para gestionar una tienda en línea de productos tecnológicos. Incluye funcionalidades para manejar usuarios, productos, categorías, marcas, pedidos y reseñas.
 ## Estructura de la base de datos
 
 ### Tabla: users
@@ -17,26 +16,14 @@ Almacena información de los usuarios registrados en la tienda.
 | avatar | VARCHAR(255) | URL del avatar del usuario |
 | phone | VARCHAR(20) | Número de teléfono |
 | address | VARCHAR(255) | Dirección del usuario |
+| latitude | DECIMAL(9,6) | Representa la coordenada de latitud de la ubicación usuario |
+| longitude | DECIMAL(9,6)| Representa la coordenada de longitud de la ubicación del usuario |
 | password | VARCHAR(255) | Contraseña encriptada |
 | active | BOOLEAN | Estado de la cuenta (activa/inactiva) |
 | registration_code | VARCHAR(50) | Código de registro |
 | recoverpass_code | VARCHAR(10) | Código para recuperar contraseña |
 | created_at | TIMESTAMP | Fecha de creación del registro |
 | updated_at | TIMESTAMP | Fecha de última actualización |
-
-### **Tabla: user_addresses**  
-Almacena las direcciones adicionales de los usuarios.
-
-| Columna     | Tipo            | Descripción                                                 |
-|-------------|-----------------|-------------------------------------------------------------|
-| id          | BIGINT          | Clave primaria, autoincremental                             |
-| user_id     | BIGINT          | ID del usuario (clave foránea a `users`)                    |
-| title       | VARCHAR(50)     | Título descriptivo de la dirección (ej.: 'Casa', 'Trabajo') |
-| address     | VARCHAR(255)    | Dirección detallada                                         |
-| latitude    | DECIMAL(9,6)    | Latitud para geolocalización                                |
-| longitude   | DECIMAL(9,6)    | Longitud para geolocalización                               |
-| created_at  | TIMESTAMP       | Fecha de creación del registro                              |
-| updated_at  | TIMESTAMP       | Fecha de última actualización                               |
 
 ### Tabla: categories
 Contiene las categorías de productos.
@@ -114,7 +101,6 @@ Contiene las reseñas de los productos realizadas por los usuarios.
 2. `orders` tiene una clave foránea a `users` (user_id).
 3. `order_details` tiene claves foráneas a `orders` (order_id) y `products` (product_id).
 4. `reviews` tiene claves foráneas a `users` (user_id) y `products` (product_id).
-5. `user_addresses` tiene una clave foránea a `users` (user_id).
 
 ## Notas adicionales
 
@@ -123,4 +109,3 @@ Contiene las reseñas de los productos realizadas por los usuarios.
 - La tabla `orders` utiliza un ENUM para el estado del pedido, limitando los valores posibles.
 - La tabla `order_details` incluye un campo calculado `subtotal` basado en la cantidad y el precio.
 - La tabla `reviews` tiene una restricción UNIQUE para evitar múltiples reseñas del mismo usuario para el mismo producto.
-- La tabla `user_addresses` permite a los usuarios almacenar múltiples direcciones, con soporte para geolocalización mediante latitud y longitud.  
