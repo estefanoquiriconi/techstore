@@ -24,20 +24,19 @@ Facilitar la venta de productos electrónicos a través de una aplicación móvi
 
 2. **Exploración y Búsqueda de Productos**  
    - Navegación por categorías: celulares, notebooks, tablets y auriculares.  
-   - Filtros y ordenamientos por marcas y precios.  
-   - Página de producto con imágenes, características técnicas, reseñas y calificaciones.  
+   - Busqueda y ordenamiento por menor o mayor precio.  
+   - Detalle del producto con imagen, descripción, reseñas y calificaciones.  
 
-3. **Carrito de Compras y Checkout**  
+3. **Carrito de Compras**  
    - Agregar productos al carrito con la posibilidad de modificar cantidades.  
    - Resumen del pedido.
-   - Confirmación del pedido y selección del método de pago.  
+   - Confirmación del pedido.  
 
 4. **Pedidos**  
    - Visualización del estado del pedido: *preparación, enviado, entregado*.  
    - Acceso al historial de pedidos anteriores.  
 
-5. **Valoraciones y Opiniones**  
-   - Calificar productos comprados y dejar comentarios.  
+5. **Reseñas**  
    - Visualización de las valoraciones de otros clientes para productos específicos.  
  
 ---
@@ -47,9 +46,7 @@ Facilitar la venta de productos electrónicos a través de una aplicación móvi
 
 2. **Exploración y Selección de Productos**: Los clientes navegan por categorías o buscan productos específicos. Pueden filtrar resultados y leer reseñas antes de agregar productos al carrito.  
 
-3. **Realización del Pedido**: Una vez completada la selección de productos, los clientes acceden al carrito, seleccionan métodos de pago y dirección de envío (si corresponde).  
-
-4. **Feedback y Fidelización**: Una vez completada la compra, los usuarios pueden calificar los productos.
+3. **Realización del Pedido**: Una vez completada la selección de productos, los clientes acceden al carrito y confirman el pedido.  
 
 ---
 
@@ -60,25 +57,4 @@ Facilitar la venta de productos electrónicos a través de una aplicación móvi
    - Opciones claras de búsqueda y filtros para agilizar la selección de productos.  
 
 2. **Proceso de Compra Fluido**  
-   - Integración de diferentes métodos de pago para comodidad del cliente.  
    - Confirmación de pedido instantánea.
-
----
-
-## 7. **Indicadores de Éxito del Proyecto**  
-- **Crecimiento de usuarios activos mensuales**.  
-- **Incremento en el volumen de ventas mensuales**.  
-- **Tasa de recompra**: Número de usuarios que realizan más de una compra en el primer mes.  
-- **Nivel de satisfacción del cliente** medido a través de reseñas y calificaciones.  
-
----
-
-## 8. **Alcance**  
-
-1. **Alcances Iniciales**  
-   - Venta de productos electrónicos exclusivamente.  
-   - Integración de pagos en línea.
----
-
-## 9. **Conclusión**  
-La tienda de productos electrónicos busca ofrecer una experiencia de compra de calidad a sus clientes a través de una aplicación móvil que centralice todo el proceso de compra. El proyecto está enfocado en garantizar un flujo eficiente para los usuarios finales.
