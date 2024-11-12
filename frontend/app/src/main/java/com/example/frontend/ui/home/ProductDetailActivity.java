@@ -1,5 +1,6 @@
 package com.example.frontend.ui.home;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -11,7 +12,10 @@ import androidx.lifecycle.ViewModelProvider;
 import com.bumptech.glide.Glide;
 import com.example.frontend.data.models.Product;
 import com.example.frontend.data.models.Review;
+import com.example.frontend.data.repositories.CartRepository;
+import com.example.frontend.data.services.ApiService;
 import com.example.frontend.databinding.ActivityProductDetailBinding;
+import com.example.frontend.utils.RetrofitClient;
 
 import java.text.MessageFormat;
 import java.text.NumberFormat;
@@ -39,6 +43,18 @@ public class ProductDetailActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(ProductDetailViewModel.class);
         setupObservers();
         viewModel.loadProductDetail(productId);
+
+        CartRepository repository = new CartRepository(this, RetrofitClient.getClient().create(ApiService.class));
+        binding.btnAddToCart.setOnClickListener(v -> {
+            repository.addToCart(productId);
+            new AlertDialog.Builder(this)
+                    .setTitle("¡Listo!")
+                    .setMessage("Producto agregado al carrito.")
+                    .setPositiveButton("Entendido", (dialog, which) -> {
+                        dialog.dismiss();
+                    })
+                    .show();
+        });
     }
 
     private void setupObservers() {

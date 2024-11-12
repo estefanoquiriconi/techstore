@@ -56,4 +56,9 @@
     <string name="no_reviews">No hay reseñas disponibles</string>
     <string name="reviews">Reseñas</string>
     <string name="add_to_cart">Agregar al carrito</string>
+    <string name="delete_product">Eliminar producto</string>
+    <string name="decrease">Decrementar cantidad</string>
+    <string name="increase">Incrementar cantidad</string>
+    <string name="shopping_cart">Carrito de Compras</string>
+    <string name="empty_cart">Carrito vacío</string>
 </resources>
