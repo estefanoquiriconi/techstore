@@ -3,7 +3,6 @@ const router = express.Router()
 const controller = require('../controllers/brandController')
 
 /**
- * @swagger
  * /brands:
  *   get:
  *     summary: Obtener todas las marcas
@@ -22,7 +21,6 @@ const controller = require('../controllers/brandController')
 router.get('/', controller.index)
 
 /**
- * @swagger
  * /brands/{id}:
  *   get:
  *     summary: Obtener una marca por ID

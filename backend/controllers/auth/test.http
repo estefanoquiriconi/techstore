@@ -55,3 +55,17 @@ Content-Type: application/json
 GET http://localhost:3000/api/auth/verify-token
 Content-Type: application/json
 Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJlc3RlZmFub3F1aXJpY29uaUBnbWFpbC5jb20iLCJpYXQiOjE3MzA1OTg2NDUsImV4cCI6MTczMDYwMjI0NX0.UY9LJxuBSdAgAMvoaOBvuTtDf00qUocOB26KUf_tvEY
+
+
+### Recuperar las ordenes de un usuario
+GET http://localhost:3000/api/orders/user/1
+Content-Type: application/json
+
+### Probar creación de orden
+POST http://localhost:3000/api/orders
+Content-Type: application/json
+
+{
+  "total_amount" : "500000",
+  "user_id" : 4
+}
