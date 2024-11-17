@@ -20,14 +20,16 @@
 
 4. **Pedidos**:
    - El sistema debe permitir que los usuarios visualicen el **estado de sus pedidos** (en preparación, enviado, entregado).
-   - El sistema debe permitir acceder al **historial de pedidos** anteriores con detalles completos.
+   - El sistema debe permitir visualizar el monto del pedido y la fecha en la que se realizó.
 
 5. **Reseñas**:
-   - El sistema debe mostrar las valoraciones de otros usuarios para cada producto.
+   - El sistema debe mostrar las valoraciones de otros usuarios en los productos
+   - El sistema debe permitir mostrar el rating de las reseñas con su respectiva fecha.
+   - El sistema debe permtir mostrar un promedio del rating.
    
 6. **Google Maps**:  
    - El sistema debe integrar **Google Maps**.  
-   - El sistema debe permitir al usuario **almacenar su dirección**-
+   - El sistema debe permitir al usuario **almacenar su dirección**
 ---
 
 ## 2. Requerimientos No Funcionales
