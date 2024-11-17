@@ -25,6 +25,17 @@ Almacena información de los usuarios registrados en la tienda.
 | created_at | TIMESTAMP | Fecha de creación del registro |
 | updated_at | TIMESTAMP | Fecha de última actualización |
 
+### Tabla: banners
+Contiene los banners del negocio.
+
+| Columna | Tipo | Descripción |
+|---------|------|-------------|
+| id | BIGINT | Clave primaria, autoincremental |
+| name | VARCHAR(255) | Nombre del banner |
+| image_url | VARCHAR(255) | Imagen del banner |
+| active | BOOLEAN | Estado del banner (activo/inactivo) |
+
+
 ### Tabla: categories
 Contiene las categorías de productos.
 
@@ -32,6 +43,7 @@ Contiene las categorías de productos.
 |---------|------|-------------|
 | id | BIGINT | Clave primaria, autoincremental |
 | name | VARCHAR(255) | Nombre de la categoría (único) |
+| image_url | VARCHAR(255) | Imagen de la categoría|
 
 ### Tabla: brands
 Almacena las marcas de los productos.

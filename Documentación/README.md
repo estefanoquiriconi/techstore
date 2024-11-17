@@ -1,60 +1,72 @@
-# **App de Tienda Electrónica TechStore**  
+# REQUERIMIENTOS
 
-## 1. **Introducción**  
-Este proyecto propone el desarrollo de una plataforma para la venta de productos electrónicos, incluyendo celulares, notebooks, tablets y auriculares. Accesible mediante una aplicación móvil. La plataforma busca mejorar la experiencia de compra en línea, optimizando la navegación, el proceso de compra y el servicio al cliente.
+## 1. Requerimientos Funcionales
+
+1. **Registro y autenticación**:
+   - El sistema debe permitir que los usuarios se registren mediante **correo electrónico**.
+   - El sistema debe permitir la **activación de la cuenta** a través de un enlace enviado por correo.
+   - El sistema debe permitir que los usuarios **inicien sesión** con su cuenta registrada.
+   - El sistema debe permitir la **recuperación de contraseña** a través de correo electrónico.
+   - El sistema debe permitir el **inicio y cierre de sesión seguros** para proteger la sesión del usuario.
+
+2. **Exploración y búsqueda de productos**:
+   - El sistema debe permitir a los usuarios filtrar por **categorías** (celulares, notebooks, tablets, auriculares).
+   - El sistema debe permitir a los usuarios buscar productos por **palabras clave** y **ordenar** por menor o mayor precio.
+   - El sistema debe mostrar una **pantalla de detalle del producto** que incluya imagen, descripción y reseñas.
+
+3. **Carrito de compras y proceso de pago**:
+   - El sistema debe permitir agregar, modificar y eliminar productos del **carrito de compras**.
+   - El sistema debe permitir la confirmación del pedido, mostrando un **resumen** antes del pago.
+
+4. **Pedidos**:
+   - El sistema debe permitir que los usuarios visualicen el **estado de sus pedidos** (en preparación, enviado, entregado).
+   - El sistema debe permitir visualizar el monto del pedido y la fecha en la que se realizó.
+
+5. **Reseñas**:
+   - El sistema debe mostrar las valoraciones de otros usuarios en los productos
+   - El sistema debe permitir mostrar el rating de las reseñas con su respectiva fecha.
+   - El sistema debe permtir mostrar un promedio del rating.
+   
+6. **Google Maps**:  
+   - El sistema debe integrar **Google Maps**.  
+   - El sistema debe permitir al usuario **almacenar su dirección**
+---
+
+## 2. Requerimientos No Funcionales
+
+1. **Usabilidad**:
+   - El sistema debe proporcionar una **interfaz intuitiva** y de fácil navegación para los usuarios.
+   - El sistema debe funcionar sin problemas en dispositivos Android modernos.
+
+2. **Rendimiento**:
+   - El sistema debe responder rápidamente, manteniendo **tiempos de carga menores a 3 segundos**.
+   - El sistema debe permitir una **búsqueda eficiente** y **actualización dinámica del inventario**.
+
+3. **Escalabilidad**:
+   - El sistema debe ser capaz de manejar un crecimiento significativo en la **cantidad de usuarios** y **productos** sin pérdida de rendimiento.
+
+4. **Seguridad**:
+   - El sistema debe encriptar las **contraseñas** y otros datos sensibles utilizando **algoritmos seguros**.
+   - El sistema debe utilizar **tokens JWT** para la gestión segura de sesiones de usuario.
 
 ---
 
-## 2. **Objetivo General**  
-Facilitar la venta de productos electrónicos a través de una aplicación móvil que permita a los clientes realizar compras de forma rápida y sencilla.
+## 3. Historias de Usuario
 
----
+1. **Historia de Registro**:  
+   - **Como** usuario nuevo, **quiero** registrarme utilizando mi correo electrónico **para** acceder a todas las funcionalidades de la tienda.
 
-## 3. **Público Objetivo**  
-- **Clientes**: Personas interesadas en adquirir productos electrónicos (estudiantes, profesionales, entusiastas de la tecnología, etc).  
----
+2. **Historia de Exploración**:  
+   - Como usuario, quiero buscar productos por categorías y ordenar resultados por precio, para encontrar rápidamente lo que necesito.
 
-## 4. **Funcionalidades Principales**  
+3. **Historia de Compra**:  
+   - Como usuario, quiero agregar productos al carrito y confirmar el pedido.
 
-### **Para los Clientes (Usuarios Finales)**  
-1. **Registro y Autenticación**  
-   - Opción de registrarse y acceder con email. 
-   - Activación de cuenta a través del email.
-   - Recuperación de contraseña de forma rápida.  
+4. **Historia de Pedido**:  
+   - Como usuario, quiero ver el historial de mis pedidos.
 
-2. **Exploración y Búsqueda de Productos**  
-   - Navegación por categorías: celulares, notebooks, tablets y auriculares.  
-   - Busqueda y ordenamiento por menor o mayor precio.  
-   - Detalle del producto con imagen, descripción, reseñas y calificaciones.  
-
-3. **Carrito de Compras**  
-   - Agregar productos al carrito con la posibilidad de modificar cantidades.  
-   - Resumen del pedido.
-   - Confirmación del pedido.  
-
-4. **Pedidos**  
-   - Visualización del estado del pedido: *preparación, enviado, entregado*.  
-   - Acceso al historial de pedidos anteriores.  
-
-5. **Reseñas**  
-   - Visualización de las valoraciones de otros clientes para productos específicos.  
- 
----
-
-## 5. **Proceso del Negocio**  
-1. **Registro de Clientes**: Los usuarios deben registrarse para realizar pedidos, consultar el estado de sus compras.  
-
-2. **Exploración y Selección de Productos**: Los clientes navegan por categorías o buscan productos específicos. Pueden filtrar resultados y leer reseñas antes de agregar productos al carrito.  
-
-3. **Realización del Pedido**: Una vez completada la selección de productos, los clientes acceden al carrito y confirman el pedido.  
-
----
-
-## 6. **Requerimientos del Negocio**  
-
-1. **Mejora de la Experiencia del Cliente**  
-   - Navegación rápida y sencilla con un diseño intuitivo.  
-   - Opciones claras de búsqueda y filtros para agilizar la selección de productos.  
-
-2. **Proceso de Compra Fluido**  
-   - Confirmación de pedido instantánea.
+5. **Historia de Reseñas**:  
+   - Como usuario, quiero visualizar reseñas sobre los productos.
+     
+6. **Historia de Almacenamiento de Direcciones**  
+   - Como usuario de la aplicación, quiero guardar mi dirección para recibir mis pedidos.
