@@ -8,6 +8,7 @@ const register = async (firstName, lastName, email, password, registrationCode) 
       last_name: lastName,
       email,
       password,
+      avatar: 'https://randomuser.me/api/portraits/men/75.jpg',
       registration_code: registrationCode
     })
     return newUser

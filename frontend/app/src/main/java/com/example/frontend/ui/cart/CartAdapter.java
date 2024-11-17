@@ -14,9 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.frontend.R;
+import com.example.frontend.utils.CurrencyUtils;
 
-import java.text.NumberFormat;
-import java.util.Locale;
 
 public class CartAdapter extends ListAdapter<CartViewModel.CartItem, CartAdapter.CartViewHolder> {
     private final CartItemListener listener;
@@ -80,8 +79,7 @@ public class CartAdapter extends ListAdapter<CartViewModel.CartItem, CartAdapter
 
         void bind(CartViewModel.CartItem item) {
             tvProductName.setText(item.product.getName());
-            NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("es", "AR"));
-            tvPrice.setText(formatter.format(Double.parseDouble(item.product.getPrice())));
+            tvPrice.setText(CurrencyUtils.formatToARCurrency(Double.parseDouble(item.product.getPrice())));
             tvQuantity.setText(String.valueOf(item.quantity));
 
             Glide.with(itemView.getContext())

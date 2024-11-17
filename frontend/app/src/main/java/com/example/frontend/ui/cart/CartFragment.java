@@ -1,5 +1,6 @@
 package com.example.frontend.ui.cart;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,59 +15,75 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.frontend.data.repositories.CartRepository;
 import com.example.frontend.data.services.ApiService;
 import com.example.frontend.databinding.FragmentCartBinding;
+import com.example.frontend.utils.CurrencyUtils;
 import com.example.frontend.utils.RetrofitClient;
 
-import java.text.NumberFormat;
 import java.util.List;
-import java.util.Locale;
 
 public class CartFragment extends Fragment implements CartAdapter.CartItemListener {
 
-    FragmentCartBinding binding;
+    private FragmentCartBinding binding;
     private CartViewModel viewModel;
     private CartAdapter adapter;
+    private double total;
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         binding = FragmentCartBinding.inflate(inflater, container, false);
-
-        setupRecyclerView();
-        setupViewModel();
-        setupListeners();
-
+        initializeComponents();
         return binding.getRoot();
     }
 
+    private void initializeComponents() {
+        setupRecyclerView();
+        setupViewModel();
+        setupListeners();
+        observeViewModelChanges();
+    }
+
     private void setupRecyclerView() {
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new CartAdapter(this);
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerView.setAdapter(adapter);
     }
 
     private void setupViewModel() {
-        CartRepository repository = new CartRepository(requireContext(),
-                RetrofitClient.getClient().create(ApiService.class));
-
-        viewModel = new ViewModelProvider(this,
-                new ViewModelProvider.Factory() {
-                    @NonNull
-                    @Override
-                    @SuppressWarnings("unchecked")
-                    public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-                        return (T) new CartViewModel(repository);
-                    }
-                }).get(CartViewModel.class);
-
-        viewModel.getCartItems().observe(getViewLifecycleOwner(), this::updateUI);
-
-        viewModel.getIsLoading().observe(getViewLifecycleOwner(), isLoading -> binding.progressBar.setVisibility(isLoading ? View.VISIBLE : View.GONE));
-
-        viewModel.getTotalPrice().observe(getViewLifecycleOwner(), total -> {
-            NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("es", "AR"));
-            binding.tvTotal.setText(formatter.format(total));
-        });
-
+        CartRepository repository = createCartRepository();
+        ViewModelProvider.Factory factory = createViewModelFactory(repository);
+        viewModel = new ViewModelProvider(this, factory).get(CartViewModel.class);
         viewModel.loadCartProducts();
+    }
+
+    private CartRepository createCartRepository() {
+        ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
+        return new CartRepository(requireContext(), apiService);
+    }
+
+    private ViewModelProvider.Factory createViewModelFactory(CartRepository repository) {
+        return new ViewModelProvider.Factory() {
+            @NonNull
+            @Override
+            @SuppressWarnings("unchecked")
+            public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+                return (T) new CartViewModel(repository);
+            }
+        };
+    }
+
+    private void observeViewModelChanges() {
+        viewModel.getCartItems().observe(getViewLifecycleOwner(), this::updateUI);
+        viewModel.getIsLoading().observe(getViewLifecycleOwner(), this::updateLoadingState);
+        viewModel.getTotalPrice().observe(getViewLifecycleOwner(), this::updateTotalPrice);
+    }
+
+    private void updateLoadingState(boolean isLoading) {
+        binding.progressBar.setVisibility(isLoading ? View.VISIBLE : View.GONE);
+    }
+
+    private void updateTotalPrice(Double totalPrice) {
+        binding.tvTotal.setText(CurrencyUtils.formatToARCurrency(totalPrice));
+        this.total = totalPrice;
     }
 
     private void setupListeners() {
@@ -74,16 +91,20 @@ public class CartFragment extends Fragment implements CartAdapter.CartItemListen
     }
 
     private void updateUI(List<CartViewModel.CartItem> items) {
-        if (items.isEmpty()) {
-            binding.recyclerView.setVisibility(View.GONE);
-            binding.emptyCartLayout.setVisibility(View.VISIBLE);
-            binding.btnCheckout.setEnabled(false);
-        } else {
-            binding.recyclerView.setVisibility(View.VISIBLE);
-            binding.emptyCartLayout.setVisibility(View.GONE);
-            binding.btnCheckout.setEnabled(true);
+        boolean isEmpty = items.isEmpty();
+        binding.recyclerView.setVisibility(isEmpty ? View.GONE : View.VISIBLE);
+        binding.emptyCartLayout.setVisibility(isEmpty ? View.VISIBLE : View.GONE);
+        binding.btnCheckout.setEnabled(!isEmpty);
+
+        if (!isEmpty) {
             adapter.submitList(items);
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        viewModel.loadCartProducts();
     }
 
     @Override
@@ -97,7 +118,8 @@ public class CartFragment extends Fragment implements CartAdapter.CartItemListen
     }
 
     private void proceedToCheckout() {
-        //TODO
+        Intent intent = new Intent(requireContext(), CheckoutActivity.class);
+        intent.putExtra("total", String.valueOf(total));
+        startActivity(intent);
     }
-
 }

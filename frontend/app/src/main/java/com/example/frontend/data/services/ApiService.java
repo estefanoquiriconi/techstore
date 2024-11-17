@@ -2,6 +2,7 @@ package com.example.frontend.data.services;
 
 import com.example.frontend.data.models.Banner;
 import com.example.frontend.data.models.Category;
+import com.example.frontend.data.models.Order;
 import com.example.frontend.data.models.Product;
 import com.example.frontend.data.models.Review;
 import com.example.frontend.data.models.User;
@@ -9,7 +10,9 @@ import com.example.frontend.data.models.User;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -42,5 +45,12 @@ public interface ApiService {
 
     @GET("api/reviews/product/{id}")
     Call<List<Review>> getProductReviews(@Path("id") int productId);
+
+    @GET("api/orders/user/{id}")
+    Call<List<Order>> getUserOrders(@Path("id") int userId);
+
+    @POST("api/orders")
+    Call<Order> saveOrder(@Body Order order);
+
 
 }

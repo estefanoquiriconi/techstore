@@ -23,6 +23,10 @@ public class CartViewModel extends ViewModel {
     private final MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
     private final MutableLiveData<Double> totalPrice = new MutableLiveData<>();
 
+    public CartViewModel(CartRepository repository) {
+        this.repository = repository;
+    }
+
     public static class CartItem {
         public Product product;
         public int quantity;
@@ -31,10 +35,11 @@ public class CartViewModel extends ViewModel {
             this.product = product;
             this.quantity = quantity;
         }
-    }
 
-    public CartViewModel(CartRepository repository) {
-        this.repository = repository;
+        public double getSubtotal() {
+            return quantity * Double.parseDouble(product.getPrice());
+        }
+
     }
 
     public LiveData<List<CartItem>> getCartItems() {
@@ -76,9 +81,9 @@ public class CartViewModel extends ViewModel {
                             }
 
                             if (pendingRequests.decrementAndGet() == 0) {
-                                cartItems.setValue(items);
+                                cartItems.postValue(items);
                                 calculateTotal(items);
-                                isLoading.setValue(false);
+                                isLoading.postValue(false);
                             }
                         }
 
@@ -91,11 +96,8 @@ public class CartViewModel extends ViewModel {
     }
 
     private void calculateTotal(List<CartItem> items) {
-        double total = 0;
-        for (CartItem item : items) {
-            total += Double.parseDouble(item.product.getPrice()) * item.quantity;
-        }
-        totalPrice.setValue(total);
+        double total = items.stream().mapToDouble(CartItem::getSubtotal).sum();
+        totalPrice.postValue(total);
     }
 
     public void updateQuantity(int productId, int newQuantity) {

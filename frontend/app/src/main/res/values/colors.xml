@@ -6,4 +6,7 @@
     <color name="secondary">#272632</color>
     <color name="abyssal_black">#1A1A24</color>
     <color name="misty_mauve">#7B7990</color>
+    <color name="status_preparation">#FFD8B1</color>
+    <color name="status_shipped">#B2DFFC</color>
+    <color name="status_delivered">#C8E6C9</color>
 </resources>

@@ -88,6 +88,12 @@ public class CartRepository {
         return productQuantities;
     }
 
+    public void clearCart() {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        db.delete(CartDBHelper.TABLE_CART, null, null);
+        db.close();
+    }
+
     public ApiService getApiService() {
         return apiService;
     }

@@ -33,7 +33,7 @@
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_home">Inicio</string>
     <string name="title_cart">Carrito</string>
-    <string name="title_order">Mis compras</string>
+    <string name="title_order">Pedidos</string>
     <string name="title_profile">Perfil</string>
     <string name="banner_image">banner image</string>
     <string name="higher_price">Mayor precio</string>
@@ -59,6 +59,5 @@
     <string name="delete_product">Eliminar producto</string>
     <string name="decrease">Decrementar cantidad</string>
     <string name="increase">Incrementar cantidad</string>
-    <string name="shopping_cart">Carrito de Compras</string>
     <string name="empty_cart">Carrito vacío</string>
 </resources>

@@ -50,9 +50,13 @@ public class ProductDetailActivity extends AppCompatActivity {
             new AlertDialog.Builder(this)
                     .setTitle("¡Listo!")
                     .setMessage("Producto agregado al carrito.")
-                    .setPositiveButton("Entendido", (dialog, which) -> {
+                    .setPositiveButton("Regresar", (dialog, which) -> {
+                        finish();
                         dialog.dismiss();
                     })
+                    .setNegativeButton("Entendido", ((dialog, which) -> {
+                        dialog.dismiss();
+                    }))
                     .show();
         });
     }
