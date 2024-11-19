@@ -35,7 +35,7 @@ public class OrderFragment extends Fragment {
     }
 
     private void setupRecyclerView() {
-        orderAdapter = new OrderAdapter();
+        orderAdapter = new OrderAdapter(this.getContext());
         binding.ordersRecyclerView.setAdapter(orderAdapter);
         binding.ordersRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
     }

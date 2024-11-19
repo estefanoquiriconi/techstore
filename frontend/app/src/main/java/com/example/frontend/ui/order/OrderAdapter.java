@@ -1,6 +1,8 @@
 package com.example.frontend.ui.order;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +16,6 @@ import com.example.frontend.data.models.Order;
 import com.example.frontend.utils.CurrencyUtils;
 import com.google.android.material.chip.Chip;
 
-import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,8 +26,10 @@ import java.util.Locale;
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder> {
 
     private List<Order> orders;
+    private final Context context;
 
-    OrderAdapter() {
+    OrderAdapter(Context context) {
+        this.context = context;
         orders = new ArrayList<>();
     }
 
@@ -56,7 +59,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         return orders.size();
     }
 
-    public static class OrderViewHolder extends RecyclerView.ViewHolder {
+    public class OrderViewHolder extends RecyclerView.ViewHolder {
         private final TextView orderNumber;
         private final Chip statusChip;
         private final TextView totalAmount;
@@ -84,6 +87,11 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             } catch (ParseException e) {
                 orderDate.setText(order.getCreatedAt());
             }
+            itemView.setOnClickListener(v -> {
+                Intent intent = new Intent(context, OrderDetailActivity.class);
+                intent.putExtra("order_id", order.getId());
+                context.startActivity(intent);
+            });
         }
 
         private int getStatusColor(String status) {

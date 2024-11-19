@@ -1,4 +1,4 @@
-const { Order } = require('../models/index.js')
+const { Order, OrderDetail, Product } = require('../models/index.js')
 const { notFoundError } = require('../helpers/error.helper.js')
 
 exports.index = async (req, res, next) => {
@@ -12,7 +12,20 @@ exports.index = async (req, res, next) => {
 
 exports.show = async (req, res, next) => {
   try {
-    const order = await Order.findByPk(req.params.id)
+    const order = await Order.findByPk(req.params.id, {
+      include: [
+        {
+          model: OrderDetail,
+          attributes: ['price', 'quantity', 'subtotal'],
+          include: [
+            {
+              model: Product,
+              attributes: ['name', 'image_url']
+            }
+          ]
+        }
+      ]
+    })
     if (!order) notFoundError('Orden no encontrada', 'ORDER_NOT_FOUND')
     res.json(order)
   } catch (error) {
