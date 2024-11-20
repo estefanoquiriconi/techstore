@@ -57,6 +57,10 @@ public class Order {
         this.created_at = created_at;
     }
 
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
+        OrderDetails = orderDetails;
+    }
+
     public int getUserId() {
         return user_id;
     }

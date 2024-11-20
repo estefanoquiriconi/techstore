@@ -52,6 +52,9 @@ public interface ApiService {
     @POST("api/orders")
     Call<Order> saveOrder(@Body Order order);
 
+    @POST("api/orders/details")
+    Call<Order> saveOrderWithDetails(@Body Order order);
+
     @GET("api/orders/{id}")
     Call<Order> getOrderDetail(@Path("id") int orderId);
 

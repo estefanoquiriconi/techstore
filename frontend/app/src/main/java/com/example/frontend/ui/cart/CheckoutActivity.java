@@ -15,12 +15,16 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.frontend.R;
 import com.example.frontend.data.models.Order;
+import com.example.frontend.data.models.OrderDetail;
 import com.example.frontend.data.repositories.CartRepository;
 import com.example.frontend.data.services.ApiService;
 import com.example.frontend.databinding.ActivityCheckoutBinding;
 import com.example.frontend.utils.CurrencyUtils;
 import com.example.frontend.utils.RetrofitClient;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 
@@ -88,18 +92,34 @@ public class CheckoutActivity extends AppCompatActivity {
     private void showPaymentResult(boolean isSuccess) {
         if (isSuccess) {
             CartRepository cartRepository = new CartRepository(this, apiService);
-            cartRepository.clearCart();
             Order order = new Order();
+            List<OrderDetail> orderDetails = new ArrayList<>();
+            Map<Integer, Integer> productQuantities = cartRepository.getCartProductsWithQuantities();
+            for (Map.Entry<Integer, Integer> entry : productQuantities.entrySet()) {
+                int productId = entry.getKey();
+                int quantity = entry.getValue();
+                orderDetails.add(new OrderDetail(productId, quantity));
+            }
+            order.setOrderDetails(orderDetails);
             order.setUserId(this.getSharedPreferences("userPreferences", Context.MODE_PRIVATE).getInt("user_id", 1));
             order.setTotalAmount(Double.parseDouble(getIntent().getStringExtra("total")));
-            apiService.saveOrder(order).enqueue(new Callback<Order>() {
+            apiService.saveOrderWithDetails(order).enqueue(new Callback<Order>() {
                 @Override
                 public void onResponse(@NonNull Call<Order> call, @NonNull Response<Order> response) {
-                    new AlertDialog.Builder(CheckoutActivity.this)
-                            .setTitle("¡Pago exitoso!")
-                            .setMessage("Su pago ha sido procesado correctamente")
-                            .setPositiveButton("Aceptar", (dialog, which) -> finish())
-                            .show();
+                    if (response.isSuccessful()) {
+                        cartRepository.clearCart();
+                        new AlertDialog.Builder(CheckoutActivity.this)
+                                .setTitle("¡Pago exitoso!")
+                                .setMessage("Su pago ha sido procesado correctamente")
+                                .setPositiveButton("Aceptar", (dialog, which) -> finish())
+                                .show();
+                    } else if (response.code() == 400) {
+                        new AlertDialog.Builder(CheckoutActivity.this)
+                                .setTitle("Stock no disponible")
+                                .setMessage("Algunos productos de tu carrito no tienen suficiente stock disponible. Por favor, revísalos antes de continuar.")
+                                .setPositiveButton("Entendido", (dialog, which) -> finish())
+                                .show();
+                    }
                 }
 
                 @Override
