@@ -1,5 +1,6 @@
 const { Order, OrderDetail, Product } = require('../models/index.js')
-const { notFoundError } = require('../helpers/error.helper.js')
+const { notFoundError, badRequestError } = require('../helpers/error.helper.js')
+const sequelize = require('../database/config/sequelize.js')
 
 exports.index = async (req, res, next) => {
   try {
@@ -42,6 +43,56 @@ exports.store = async (req, res, next) => {
     })
     res.status(201).json(order)
   } catch (error) {
+    next(error)
+  }
+}
+
+exports.storeWithDetails = async (req, res, next) => {
+  const transaction = await sequelize.transaction()
+  try {
+    const {
+      total_amount: totalAmount,
+      user_id: userId,
+      OrderDetails: orderDetails
+    } = req.body
+
+    for (const detail of orderDetails) {
+      const product = await Product.findByPk(detail.product_id)
+      if (!product) {
+        badRequestError(`Producto con ID ${detail.product_id} no encontrado.`)
+      }
+      if (product.stock < detail.quantity) {
+        badRequestError(`Stock insuficiente para el producto "${product.name}". Disponible: ${product.stock}, solicitado: ${detail.quantity}.`)
+      }
+    }
+
+    const order = await Order.create({
+      total_amount: totalAmount,
+      user_id: userId
+    }, { transaction })
+
+    const orderDetailsToCreate = await Promise.all(orderDetails.map(async detail => {
+      const product = await Product.findByPk(detail.product_id)
+      product.stock -= detail.quantity
+      product.save({ transaction })
+      return {
+        quantity: detail.quantity,
+        price: product.price,
+        product_id: detail.product_id,
+        order_id: order.id
+      }
+    }))
+
+    await OrderDetail.bulkCreate(orderDetailsToCreate, { transaction })
+
+    await (transaction).commit()
+
+    res.status(201).json({
+      message: 'Orden creada',
+      order
+    })
+  } catch (error) {
+    await (transaction).rollback()
     next(error)
   }
 }

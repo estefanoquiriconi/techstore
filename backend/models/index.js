@@ -9,6 +9,7 @@ const Review = require('./review.js')
 
 Product.belongsTo(Brand, { foreignKey: 'brand_id' })
 Product.belongsTo(Category, { foreignKey: 'category_id' })
+Product.hasMany(OrderDetail, { foreignKey: 'product_id' })
 
 Order.belongsTo(User, { foreignKey: 'user_id' })
 Order.hasMany(OrderDetail, { foreignKey: 'order_id' })

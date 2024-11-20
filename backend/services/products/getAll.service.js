@@ -1,3 +1,4 @@
+const { Op } = require('sequelize')
 const { Product, Category, Brand } = require('../../models/index.js')
 
 const getAll = async ({ category, sortBy = 'created_at', order = 'desc' }) => {
@@ -14,7 +15,8 @@ const getAll = async ({ category, sortBy = 'created_at', order = 'desc' }) => {
       }
     ],
     where: {
-      active: true
+      active: true,
+      stock: { [Op.gt]: 0 }
     },
     attributes: [
       'id',

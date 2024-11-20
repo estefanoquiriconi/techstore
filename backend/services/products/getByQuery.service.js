@@ -8,7 +8,9 @@ const getByQuery = async (query) => {
         { name: { [Op.like]: `%${query}%` } },
         { description: { [Op.like]: `%${query}%` } },
         { image_url: { [Op.like]: `%${query}%` } }
-      ]
+      ],
+      active: true,
+      stock: { [Op.gt]: 0 }
     },
     attributes: [
       'id',

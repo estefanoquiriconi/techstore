@@ -94,4 +94,6 @@ router.get('/user/:id', controller.getByUserId)
  */
 router.post('/', controller.store)
 
+router.post('/details', controller.storeWithDetails)
+
 module.exports = router
