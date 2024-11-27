@@ -55,6 +55,7 @@ dependencies {
 
     //Maps
     implementation(libs.play.services.maps)
+    implementation(libs.play.services.location)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

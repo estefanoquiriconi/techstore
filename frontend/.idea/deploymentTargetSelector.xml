@@ -4,7 +4,7 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-11-19T01:03:49.567158400Z">
+        <DropdownSelection timestamp="2024-11-22T20:19:07.651792971Z">
           <Target type="DEFAULT_BOOT">
             <handle>
               <DeviceId pluginId="PhysicalDevice" identifier="serial=ZY22GVJF3L" />
@@ -15,12 +15,12 @@
           <targets>
             <Target type="DEFAULT_BOOT">
               <handle>
-                <DeviceId pluginId="PhysicalDevice" identifier="serial=ZY22GVJF3L" />
+                <DeviceId pluginId="PhysicalDevice" identifier="serial=R8MTA00BAVV" />
               </handle>
             </Target>
             <Target type="DEFAULT_BOOT">
               <handle>
-                <DeviceId pluginId="LocalEmulator" identifier="path=/home/estefano/.android/avd/Medium_Phone_API_35.avd" />
+                <DeviceId pluginId="PhysicalDevice" identifier="serial=ZY22GVJF3L" />
               </handle>
             </Target>
           </targets>

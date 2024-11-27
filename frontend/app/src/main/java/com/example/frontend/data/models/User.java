@@ -22,6 +22,8 @@ public class User {
         this.longitude = longitude;
         this.avatar = avatar;
     }
+    public User() {
+    }
 
     public String getFirstName() {
         return first_name;

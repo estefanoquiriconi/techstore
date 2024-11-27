@@ -87,8 +87,10 @@ public class ProfileFragment extends Fragment {
         binding.address.setText(user.getAddress());
 
         loadProfileImage(user.getAvatar());
+        if(user.getLongitude() != 0 && user.getLatitude() != 0){
+            updateMap(new LatLng(user.getLatitude(), user.getLongitude()));
+        }
 
-        updateMap(new LatLng(user.getLatitude(), user.getLongitude()));
     }
 
     private void loadProfileImage(String avatarUrl) {
