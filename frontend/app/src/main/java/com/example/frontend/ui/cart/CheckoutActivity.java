@@ -287,8 +287,10 @@ public class CheckoutActivity extends AppCompatActivity implements OnMapReadyCal
 
         User user = new User();
         user.setAddress(address);
-        user.setLatitude(userLocation.latitude);
-        user.setLongitude(userLocation.longitude);
+        if(userLocation != null){
+            user.setLatitude(userLocation.latitude);
+            user.setLongitude(userLocation.longitude);
+        }
         user.setPhone(phone);
 
         apiService.updateUser(getUserId(), user).enqueue(new Callback<User>() {
