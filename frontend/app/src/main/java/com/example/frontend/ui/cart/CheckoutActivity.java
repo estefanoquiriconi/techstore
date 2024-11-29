@@ -146,6 +146,7 @@ public class CheckoutActivity extends AppCompatActivity implements OnMapReadyCal
             List<Address> addressList = geocoder.getFromLocationName(location, 1);
             if (addressList != null && !addressList.isEmpty()) {
                 Address address = addressList.get(0);
+                binding.editTextAddress.setText(location);
                 updateMap(new LatLng(address.getLatitude(), address.getLongitude()), location);
             }
         } catch (IOException e) {

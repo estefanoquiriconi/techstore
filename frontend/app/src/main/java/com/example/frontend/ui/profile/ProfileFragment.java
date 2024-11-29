@@ -2,14 +2,12 @@ package com.example.frontend.ui.profile;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -22,7 +20,7 @@ import com.example.frontend.data.models.User;
 import com.example.frontend.databinding.FragmentProfileBinding;
 import com.example.frontend.ui.login.LoginActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -31,64 +29,39 @@ public class ProfileFragment extends Fragment {
 
     private FragmentProfileBinding binding;
     private ProfileViewModel profileViewModel;
-    private SupportMapFragment mapFragment;
     private static final float MAP_ZOOM_LEVEL = 15f;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
-
-        loadUserData();
-    }
+    private GoogleMap googleMap;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentProfileBinding.inflate(inflater, container, false);
-
-        initializeMapFragment();
-        setupObservers();
-        setupClickListeners();
-
+        binding.mapView.onCreate(savedInstanceState);
+        profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
+        profileViewModel.getUser().observe(getViewLifecycleOwner(), this::updateUI);
+        loadUserData();
+        binding.floatingActionButtonLogout.setOnClickListener(v -> handleLogout());
         return binding.getRoot();
     }
 
     private void loadUserData() {
-        int userId = requireActivity().getSharedPreferences("userPreferences", Context.MODE_PRIVATE)
-                .getInt("user_id", 1);
-        profileViewModel.loadUser(userId);
-    }
-
-    private void initializeMapFragment() {
-        mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.mapProfile);
-        if (mapFragment == null) {
-            mapFragment = SupportMapFragment.newInstance();
-            getChildFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.mapProfile, mapFragment)
-                    .commit();
-        }
-    }
-
-    private void setupObservers() {
-        profileViewModel.getUser().observe(getViewLifecycleOwner(), this::updateUI);
-    }
-
-    private void setupClickListeners() {
-        binding.floatingActionButtonLogout.setOnClickListener(v -> handleLogout());
+        profileViewModel.loadUser(requireActivity().getSharedPreferences("userPreferences", Context.MODE_PRIVATE).getInt("user_id", 1));
     }
 
     private void updateUI(User user) {
         if (user == null) return;
-
         binding.fullName.setText(String.format("%s %s", user.getFirstName(), user.getLastName()));
         binding.email.setText(user.getEmail());
         binding.phone.setText(user.getPhone());
         binding.address.setText(user.getAddress());
 
         loadProfileImage(user.getAvatar());
-        if(user.getLongitude() != 0 && user.getLatitude() != 0){
-            updateMap(new LatLng(user.getLatitude(), user.getLongitude()));
+
+        if (user.getLongitude() != 0 && user.getLatitude() != 0) {
+            LatLng userLocation = new LatLng(user.getLatitude(), user.getLongitude());
+            binding.mapView.getMapAsync(map -> {
+                googleMap = map;
+                googleMap.addMarker(new MarkerOptions().position(userLocation).title(user.getAddress()));
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, MAP_ZOOM_LEVEL));
+            });
         }
 
     }
@@ -106,18 +79,6 @@ public class ProfileFragment extends Fragment {
                 .into(binding.profileImage);
     }
 
-    private void updateMap(LatLng location) {
-        if (mapFragment != null) {
-            mapFragment.getMapAsync(googleMap -> {
-                googleMap.clear();
-                googleMap.addMarker(new MarkerOptions()
-                        .position(location)
-                        .title("Tu ubicación"));
-                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, MAP_ZOOM_LEVEL));
-            });
-        }
-    }
-
     private void handleLogout() {
         new MaterialAlertDialogBuilder(requireContext())
                 .setTitle("Cerrar sesión")
@@ -128,20 +89,46 @@ public class ProfileFragment extends Fragment {
     }
 
     private void logout() {
-        SharedPreferences.Editor editor = requireActivity()
+        clearUserPreferences();
+        navigateToLogin();
+    }
+
+    private void clearUserPreferences() {
+        requireActivity()
                 .getSharedPreferences("userPreferences", Context.MODE_PRIVATE)
-                .edit();
-        editor.remove("token")
+                .edit()
+                .remove("token")
                 .remove("user_id")
                 .apply();
+    }
 
+    private void navigateToLogin() {
         startActivity(new Intent(requireActivity(), LoginActivity.class));
         requireActivity().finish();
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        binding.mapView.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        binding.mapView.onPause();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        binding.mapView.onLowMemory();
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
+        binding.mapView.onDestroy();
         binding = null;
     }
 }
