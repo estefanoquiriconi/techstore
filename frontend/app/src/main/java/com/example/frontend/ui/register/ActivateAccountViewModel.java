@@ -1,5 +1,7 @@
 package com.example.frontend.ui.register;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -14,41 +16,50 @@ import retrofit2.Response;
 
 public class ActivateAccountViewModel extends ViewModel {
 
-    private final AuthService authService;
-    private final MutableLiveData<ApiResponse> apiResponse = new MutableLiveData<>();
-    private final MutableLiveData<String> errorMessage = new MutableLiveData<>();
+    private static final String ACTIVATION_ERROR = "No se pudo activar la cuenta.";
+    private static final String CONNECTION_ERROR = "Error de conexión: ";
 
+    private final AuthService authService;
+    private final MutableLiveData<ApiResponse> _apiResponse = new MutableLiveData<>();
+    private final MutableLiveData<String> _errorMessage = new MutableLiveData<>();
 
     public ActivateAccountViewModel() {
-        this.authService = RetrofitClient.getClient().create(AuthService.class);
+        authService = RetrofitClient.getClient().create(AuthService.class);
     }
 
-    public MutableLiveData<ApiResponse> getApiResponse() {
-        return apiResponse;
+    public LiveData<ApiResponse> getApiResponse() {
+        return _apiResponse;
     }
 
-    public MutableLiveData<String> getErrorMessage() {
-        return errorMessage;
+    public LiveData<String> getErrorMessage() {
+        return _errorMessage;
     }
 
-    public void activeAccount(String activationCode) {
-        ActivateAccountRequest activateAccountRequest = new ActivateAccountRequest(activationCode);
+    public void activateAccount(String activationCode) {
+        if (activationCode == null || activationCode.isEmpty()) {
+            _errorMessage.postValue(ACTIVATION_ERROR);
+            return;
+        }
 
-        authService.activateAccount(activateAccountRequest).enqueue(new Callback<ApiResponse>() {
+        ActivateAccountRequest request = new ActivateAccountRequest(activationCode);
+        authService.activateAccount(request).enqueue(new Callback<ApiResponse>() {
             @Override
-            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    apiResponse.postValue(response.body());
-                } else {
-                    errorMessage.postValue("No se pudo activar la cuenta.");
-                }
+            public void onResponse(@NonNull Call<ApiResponse> call, @NonNull Response<ApiResponse> response) {
+                handleActivationResponse(response);
             }
 
             @Override
-            public void onFailure(Call<ApiResponse> call, Throwable t) {
-                errorMessage.postValue("Error de conexión: " + t.getMessage());
+            public void onFailure(@NonNull Call<ApiResponse> call, @NonNull Throwable t) {
+                _errorMessage.postValue(CONNECTION_ERROR + t.getMessage());
             }
         });
+    }
 
+    private void handleActivationResponse(Response<ApiResponse> response) {
+        if (response.isSuccessful() && response.body() != null) {
+            _apiResponse.postValue(response.body());
+        } else {
+            _errorMessage.postValue(ACTIVATION_ERROR);
+        }
     }
 }
