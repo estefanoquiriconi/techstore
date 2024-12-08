@@ -10,7 +10,7 @@ const verifyRecoverCode = async (req, res, next) => {
     const { recoverpass_code: recoverpassCode } = req.body
 
     const user = await User.findOne({ where: { recoverpass_code: recoverpassCode } })
-    if (!user) notFoundError('Usuario no encontrado', 'USER_NOT_FOUND')
+    if (!user) notFoundError('Código de recuperación inválido', 'INVALID_RECOVERY_CODE')
 
     if (user.recoverpass_code === recoverpassCode) {
       user.recoverpass_code = null
