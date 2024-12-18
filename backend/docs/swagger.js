@@ -14,7 +14,7 @@ const swaggerDefinition = {
       description: 'Servidor local'
     },
     {
-      url: 'https://4507-181-199-152-124.ngrok-free.app/api/',
+      url: 'https://c468-181-199-152-106.ngrok-free.app/api/',
       description: 'Servidor de producción'
     }
   ]
