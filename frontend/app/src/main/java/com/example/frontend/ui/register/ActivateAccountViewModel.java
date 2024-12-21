@@ -16,7 +16,7 @@ import retrofit2.Response;
 
 public class ActivateAccountViewModel extends ViewModel {
 
-    private static final String ACTIVATION_ERROR = "No se pudo activar la cuenta.";
+    private static final String ACTIVATION_ERROR = "No se pudo activar la cuenta, por favor verifica que el código sea correcto.";
     private static final String CONNECTION_ERROR = "Error de conexión: ";
 
     private final AuthService authService;

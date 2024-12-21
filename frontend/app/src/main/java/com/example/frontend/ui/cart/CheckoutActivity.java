@@ -204,7 +204,7 @@ public class CheckoutActivity extends AppCompatActivity implements OnMapReadyCal
             }
 
             showPaymentResult(isSuccess);
-        }, 3000);
+        }, 1200);
     }
 
     private boolean validateFields() {
@@ -228,7 +228,7 @@ public class CheckoutActivity extends AppCompatActivity implements OnMapReadyCal
         } else {
             new AlertDialog.Builder(this)
                     .setTitle("¡Pago rechazado!")
-                    .setMessage("Lo entimos, su pago ha sido rechazado. Intente nuevamente")
+                    .setMessage("Lo sentimos, su pago ha sido rechazado. Intente nuevamente")
                     .setPositiveButton("Aceptar", null)
                     .show();
         }

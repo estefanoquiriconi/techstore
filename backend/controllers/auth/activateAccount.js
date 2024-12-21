@@ -1,7 +1,7 @@
 const User = require('../../models/user')
 const authService = require('../../services/auth/index.service')
 const { validationResult } = require('express-validator')
-const { notFoundError, badRequestError } = require('../../helpers/error.helper')
+const { badRequestError, notAuthorizedError } = require('../../helpers/error.helper')
 
 const activateAccount = async (req, res, next) => {
   try {
@@ -11,7 +11,7 @@ const activateAccount = async (req, res, next) => {
     const { registration_code: registrationCode } = req.body
 
     const user = await User.findOne({ where: { registration_code: registrationCode } })
-    if (!user) notFoundError('Usuario no encontrado', 'USER_NOT_FOUND')
+    if (!user) notAuthorizedError('Código de activación incorrecto', 'INVALID_ACTIVATION_CODE')
 
     authService.activate(user)
 

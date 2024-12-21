@@ -3,7 +3,6 @@ package com.example.frontend.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -24,8 +23,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SplashActivity extends AppCompatActivity {
-
-    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,5 +1,5 @@
 const { validationResult } = require('express-validator')
-const { notFoundError, badRequestError } = require('../../helpers/error.helper')
+const { badRequestError, notAuthorizedError } = require('../../helpers/error.helper')
 const User = require('../../models/user')
 
 const verifyRecoverCode = async (req, res, next) => {
@@ -10,7 +10,7 @@ const verifyRecoverCode = async (req, res, next) => {
     const { recoverpass_code: recoverpassCode } = req.body
 
     const user = await User.findOne({ where: { recoverpass_code: recoverpassCode } })
-    if (!user) notFoundError('Código de recuperación inválido', 'INVALID_RECOVERY_CODE')
+    if (!user) notAuthorizedError('Código de recuperación inválido', 'INVALID_RECOVERY_CODE')
 
     if (user.recoverpass_code === recoverpassCode) {
       user.recoverpass_code = null

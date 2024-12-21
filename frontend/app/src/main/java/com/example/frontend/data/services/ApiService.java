@@ -34,7 +34,6 @@ public interface ApiService {
             @Query("sortBy") String sortBy,
             @Query("order") String order
     );
-
     @GET("api/products/search/{query}")
     Call<List<Product>> getProductsByQuery(@Path("query") String query);
 
